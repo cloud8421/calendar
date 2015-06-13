@@ -1,9 +1,11 @@
+$day-size: 4em;
+
 * {
   margin: 0;
   padding: 0;
 }
 
-h1 {
+h1, .date {
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -25,4 +27,30 @@ header {
 
 .title {
   color: #ccc;
+}
+
+.calendar {
+  width: $day-size * 7;
+  margin: 0 auto;
+}
+
+.month {
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.week {
+  display: flex;
+}
+
+.day {
+  width: $day-size;
+  height: $day-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  background-color: #eee;
 }
