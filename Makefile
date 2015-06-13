@@ -1,4 +1,4 @@
-.PHONY: all setup server watch-src watch-scss build-sass build-js build
+.PHONY: all setup server watch-src watch-scss build-sass build-js build-html build
 
 IMAGES_FOLDER = ./images
 STYLES_FOLDER = ./styles
@@ -20,7 +20,7 @@ STYLES_BUILD_FILE_URL = /app.css
 
 JS_BUILD_OPTS = -t [ babelify --sourceMapRelative . ]
 
-all: server watch-src watch-scss build-html build-images
+all: build-html build-images build-sass server watch-src watch-scss
 
 $(BUILD_FOLDER):
 	mkdir -p $@
@@ -32,6 +32,11 @@ setup:
 	npm install -g browserify watchify
 	brew install sassc fswatch
 	npm install
+	mkdir -p images
+	mkdir -p styles
+	mkdir -p src
+	touch styles/app.scss
+	touch src/app.js
 
 server: $(BUILD_FOLDER)
 	cd $(BUILD_FOLDER) && python -m SimpleHTTPServer > /dev/null 2>&1
