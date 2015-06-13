@@ -5,7 +5,7 @@ $day-size: 4em;
   padding: 0;
 }
 
-h1, .date {
+h1, h2, .date {
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -39,6 +39,11 @@ header {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5em;
+  }
 }
 
 .week {
