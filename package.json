@@ -8,7 +8,9 @@
     "babelify": "^6.1.1"
   },
   "dependencies": {
+    "baobab": "^1.1.0",
     "calendar": "^0.1.0",
+    "flux": "^2.0.3",
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3"

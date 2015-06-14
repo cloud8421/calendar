@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import c from 'calendar';
+
+import Actions from '../actions';
 import Week from './week';
 
 let Cal = new c.Calendar(1); // Monday;
@@ -24,25 +26,18 @@ let weeksFromDate = function(d, now) {
 }
 
 class Month extends React.Component {
-  constructor(props) {
-    super(props);
-    let d = props.startDate;
-    let now = props.now;
-    this.state = {
-      weeks: weeksFromDate(d, now)
-    }
-  }
   backOneMonth() {
-    console.log('back');
+    Actions.backOneMonth();
   }
   forwardOneMonth() {
-    console.log('forward');
+    Actions.forwardOneMonth();
   }
   render() {
-    let weekComponents = this.state.weeks.map((week, idx) => {
+    let weeks = weeksFromDate(this.props.startDate, this.props.now);
+    let weekComponents = weeks.map((week, idx) => {
       return <Week week={week} key={idx} />
     });
-    let monthName = moment(this.props.startDate).format('MMMM')
+    let monthName = moment(this.props.startDate).format('MMMM YYYY')
 
     return (
       <div className="month">
