@@ -1,3 +1,5 @@
+@import 'bourbon/bourbon';
+
 $day-size: 4em;
 
 * {
@@ -18,8 +20,8 @@ header {
 }
 
 .main-nav {
-  display: flex;
-  align-items: center;
+  @include display(flex);
+  @include align-items(center);
   padding: 0.5em;
 }
 
@@ -40,14 +42,14 @@ header {
 
 .month {
   margin-top: 1em;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
+  @include display(flex);
+  @include justify-content(flex-start);
+  @include flex-direction(column);
 
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include display(flex);
+    @include justify-content(space-between);
+    @include align-items(center);
     padding: 0.4em;
   }
 
@@ -70,15 +72,15 @@ header {
 }
 
 .week, .week-header {
-  display: flex;
+  @include display(flex);
 }
 
 .day {
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
   width: $day-size;
   height: $day-size;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 1px solid white;
   background-color: #eee;
 
