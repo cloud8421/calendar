@@ -1,8 +1,8 @@
 import React from 'react';
 import Month from './components/month';
+import State from './state';
 
 let container = document.getElementById('main');
-let now = new Date();
 
 class Main extends React.Component {
   render() {
@@ -15,7 +15,7 @@ class Main extends React.Component {
           </nav>
         </header>
         <section className="calendar">
-          <Month startDate={now} />
+          <Month startDate={State.startDate} now={State.now} />
         </section>
       </div>
     );

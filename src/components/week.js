@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from '../prop-types';
 import Day from './day';
 
 class Week extends React.Component {
   render() {
-    let days = this.props.week.map((day, idx) => {
-      return <Day day={day} key={idx} />
+    let days = this.props.week.map((dayObj, idx) => {
+      return <Day day={dayObj.day}
+                  selected={dayObj.selected}
+                  key={idx} />
     });
 
     return (
@@ -15,6 +18,12 @@ class Week extends React.Component {
   }
 }
 
-Week.propTypes = { week: React.PropTypes.arrayOf(React.PropTypes.number) };
+Week.propTypes = {
+  week: React.PropTypes.arrayOf(
+            React.PropTypes.shape({
+              day: PropTypes.date,
+              selected: React.PropTypes.boolean
+            }))
+};
 
 export default Week;

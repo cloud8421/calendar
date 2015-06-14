@@ -58,4 +58,8 @@ header {
   justify-content: center;
   border: 1px solid white;
   background-color: #eee;
+
+  &.selected {
+    border: 1px solid #333;
+  }
 }
