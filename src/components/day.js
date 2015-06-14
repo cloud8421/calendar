@@ -3,11 +3,7 @@ import moment from 'moment';
 import PropTypes from '../prop-types';
 
 let dayClass = (selected) => {
-  if (selected) {
-    return 'day selected'
-  } else {
-    return 'day';
-  }
+  return selected ? 'day selected' : 'day'
 }
 
 class Day extends React.Component {
@@ -17,9 +13,7 @@ class Day extends React.Component {
 
     return (
       <div className={dayClass(selected)}>
-        <span className="date">
-          {day !== 0 ? day : 'x'}
-        </span>
+        <span className="date">{day}</span>
       </div>
     )
   }
