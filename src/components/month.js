@@ -7,7 +7,7 @@ import U from '../utils';
 
 class Month extends React.Component {
   render() {
-    let weeks = U.weeksFromDate(this.props.startDate, this.props.now);
+    let weeks = U.weeksFromDate(this.props.startDate, this.props.currentDate);
     let weekComponents = weeks.map((week, idx) => {
       return <Week week={week} key={idx} />
     });

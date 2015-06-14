@@ -30,7 +30,7 @@ class Main extends React.Component {
         </header>
         <section className="calendar">
           <Month startDate={this.state.startDate}
-                 now={this.state.currentDate} />
+                 currentDate={this.state.currentDate} />
         </section>
       </div>
     );
