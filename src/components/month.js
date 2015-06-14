@@ -42,15 +42,15 @@ class Month extends React.Component {
     let weekComponents = this.state.weeks.map((week, idx) => {
       return <Week week={week} key={idx} />
     });
-    let monthHeader = moment(this.props.startDate).format('MMMM')
+    let monthName = moment(this.props.startDate).format('MMMM')
 
     return (
       <div className="month">
-        <h2>
-          <button onClick={this.backOneMonth}>Back</button>
-          {monthHeader}
-          <button onClick={this.forwardOneMonth}>Forward</button>
-        </h2>
+        <header>
+          <button onClick={this.backOneMonth}>&lt;&lt;</button>
+          <h2>{monthName}</h2>
+          <button onClick={this.forwardOneMonth}>&gt;&gt;</button>
+        </header>
         {weekComponents}
       </div>
     )
