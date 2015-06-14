@@ -14,15 +14,23 @@ let dateToDayPair = (d, now) => {
   }
 }
 
-let weeksFromDate = function(d, now) {
+let weeksFromDate = (d, now) => {
   return Cal.monthDates(d.getFullYear(),
                        d.getMonth(),
                        (curDate) => dateToDayPair(curDate, now),
                        (curWeek) => curWeek)
 }
 
+let followingMonthFromDate = (d) => {
+  return moment(d).add(1, 'month');
+}
+
+let previousMonthFromDate = (d) => {
+  return moment(d).subtract(1, 'month');
+}
+
 export default {
-  isSameDay,
-  dateToDayPair,
-  weeksFromDate
+  weeksFromDate,
+  followingMonthFromDate,
+  previousMonthFromDate
 }
