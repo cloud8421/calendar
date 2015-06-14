@@ -9,7 +9,7 @@ body {
   font-size: 18px;
 }
 
-h1, h2, .date {
+h1, h2, .date, .day-header {
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -69,7 +69,7 @@ header {
   }
 }
 
-.week {
+.week, .week-header {
   display: flex;
 }
 
@@ -85,4 +85,13 @@ header {
   &.selected {
     border: 1px solid #333;
   }
+}
+
+.day-header {
+  width: $day-size;
+  text-align: center;
+  padding: 0.4em;
+  border: 1px solid white;
+  background-color: lighten(#111, 30%);
+  color: white;
 }

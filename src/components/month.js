@@ -5,6 +5,20 @@ import Actions from '../actions';
 import Week from './week';
 import U from '../utils';
 
+class MonthHeaders extends React.Component {
+  shouldComponentUpdate() { return false }
+  render() {
+    let labels = U.weekDays().map((day) => {
+      return <div className='day-header' key={day}>{day}</div>
+    });
+    return (
+      <div className='week-header'>
+        {labels}
+      </div>
+    )
+  }
+}
+
 class Month extends React.Component {
   render() {
     let weeks = U.weeksFromDate(this.props.startDate, this.props.currentDate);
@@ -22,6 +36,7 @@ class Month extends React.Component {
           <h2>{monthName}</h2>
           <button onClick={Actions.forwardOneMonth}>{nextLabel}</button>
         </header>
+        <MonthHeaders />
         {weekComponents}
       </div>
     )

@@ -3,6 +3,16 @@ import C from 'calendar';
 
 let Cal = new C.Calendar(1); // Monday;
 
+let rotate = (array) => {
+  let first = array.shift();
+  array.push(first);
+  return array;
+}
+
+let weekDays = () => {
+  return rotate(moment.weekdaysShort())
+}
+
 let isSameDay = (d1, d2) => {
   return moment(d1).isSame(d2, 'day');
 }
@@ -30,6 +40,7 @@ let previousMonthFromDate = (d) => {
 }
 
 export default {
+  weekDays,
   weeksFromDate,
   followingMonthFromDate,
   previousMonthFromDate
