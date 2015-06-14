@@ -51,6 +51,7 @@ header {
     @include justify-content(space-between);
     @include align-items(center);
     padding: 0.4em;
+    border: 1px solid white;
   }
 
   h2 {
@@ -85,7 +86,8 @@ header {
   background-color: #eee;
 
   &.selected {
-    border: 1px solid #333;
+    background-color: darken(#eee, 30%);
+    color: white;
   }
 }
 
