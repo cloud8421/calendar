@@ -3,6 +3,7 @@ import moment from 'moment';
 import State from '../state';
 import Month from './month';
 import Actions from '../actions';
+import Loading from './loading';
 
 let startDateCursor;
 let currentDateCursor;
@@ -46,7 +47,7 @@ class MonthContainer extends React.Component {
         </section>
       );
     } else {
-      return <div className="loading">Loading</div>
+      return <Loading />;
     }
   }
   componentWillMount() {

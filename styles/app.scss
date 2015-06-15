@@ -97,6 +97,14 @@ header {
   }
 }
 
+.loading {
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
+  min-height: 20em;
+  background-color: #eee;
+}
+
 .events-count {
   position: absolute;
   right: 0.3em;
