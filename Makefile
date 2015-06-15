@@ -32,11 +32,6 @@ setup:
 	npm install -g browserify watchify
 	brew install sassc fswatch
 	npm install
-	mkdir -p images
-	mkdir -p styles
-	mkdir -p src
-	touch styles/app.scss
-	touch src/app.js
 
 server: $(BUILD_FOLDER)
 	cd $(BUILD_FOLDER) && python -m SimpleHTTPServer > /dev/null 2>&1
