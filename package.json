@@ -1,7 +1,7 @@
 {
-  "name": "react-playground-boilerplate",
+  "name": "calendar-react-example",
   "version": "1.0.0",
-  "description": "Stripped down boilerplate to start building React apps very quickly",
+  "description": "A calendar to showcase React",
   "author": "Claudio Ortolina",
   "license": "ISC",
   "devDependencies": {
