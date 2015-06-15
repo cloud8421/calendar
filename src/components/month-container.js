@@ -4,8 +4,8 @@ import State from '../state';
 import Month from './month';
 import Actions from '../actions';
 
-let startDateCursor = State.select('startDate');
-let currentDateCursor = State.select('currentDate');
+let startDateCursor;
+let currentDateCursor;
 
 let getState = () => {
   return {
@@ -32,7 +32,10 @@ let setMonth = (params) => {
 class MonthContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = getState();
+    this.state = {
+      startDate: null,
+      currentDate: null
+    }
   }
   render() {
     if (this.state.startDate && this.state.currentDate) {
@@ -46,11 +49,21 @@ class MonthContainer extends React.Component {
       return <div className="loading">Loading</div>
     }
   }
+  componentWillMount() {
+    startDateCursor   = State.select('startDate');
+    currentDateCursor = State.select('currentDate');
+  }
+  componentWillUnmount() {
+    startDateCursor.release();
+    currentDateCursor.release();
+  }
   componentWillReceiveProps(props) {
     if (props.params) { setMonth(props.params) }
   }
   componentDidMount() {
     if (this.props.params) { setMonth(this.props.params) }
+
+    this.setState(getState());
     startDateCursor.on('update', () => {
       this.setState(getState());
     })
