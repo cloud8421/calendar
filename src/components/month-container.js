@@ -14,8 +14,18 @@ let getState = () => {
   }
 }
 
+let validParams = (params) => {
+  return params.year && params.month;
+}
+
 let setMonth = (params) => {
-  let curDate = moment(new Date(params.year, params.month - 1, 1));
+  let curDate;
+
+  if (validParams(params)) {
+    curDate = moment(new Date(params.year, params.month - 1, 1));
+  } else {
+    curDate = moment(new Date());
+  }
   Actions.setCurrentDay(curDate);
 }
 

@@ -6,6 +6,7 @@ import MonthContainer from './components/month-container';
 let Routes = (
   <Route name="main" path="/" handler={Main}>
     <Route name="month" path=":year/:month" handler={MonthContainer} />
+    <DefaultRoute handler={MonthContainer} />
   </Route>
 )
 
