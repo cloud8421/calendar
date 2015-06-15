@@ -11,7 +11,7 @@ body {
   font-size: 18px;
 }
 
-h1, h2, .date, .day-header {
+h1, h2, .date, .day-header, .events-count {
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -84,11 +84,26 @@ header {
   height: $day-size;
   border: 1px solid white;
   background-color: #eee;
+  position: relative;
 
   &.selected {
     background-color: darken(#eee, 30%);
     color: white;
   }
+}
+
+.events-count {
+  position: absolute;
+  right: 0.2em;
+  bottom: 0.3em;
+  background-color: #F03025;
+  color: white;
+  font-size: 0.7em;
+  border-radius: 50%;
+  width: 1.1em;
+  height: 1.1em;
+  text-align: center;
+  display: block;
 }
 
 .day-header {
