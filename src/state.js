@@ -7,10 +7,9 @@ let toBeginningOfMonth = function(d) {
 }
 
 let currentDate = new Date();
-let startDate = toBeginningOfMonth(currentDate);
 
 let State = new Baobab({
-  startDate: startDate,
+  startDate: null,
   currentDate: currentDate,
   events: [
     {
@@ -52,17 +51,18 @@ let decOneMonth = (current) => {
          ._d
 }
 
+let startDateCursor = State.select('startDate');
+
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
     case 'forward-one-month':
-      State
-        .select('startDate')
-        .apply(incOneMonth);
+      startDateCursor.apply(incOneMonth);
       break;
     case 'back-one-month':
-      State
-        .select('startDate')
-        .apply(decOneMonth);
+      startDateCursor.apply(decOneMonth);
+      break;
+    case 'set-current-date':
+      State.set('startDate', payload.value);
       break;
     default:
       return true
