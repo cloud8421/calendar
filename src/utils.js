@@ -32,17 +32,7 @@ let weeksFromDate = (mom, now) => {
                        (curWeek) => curWeek)
 }
 
-let followingMonthFromDate = (mom) => {
-  return mom.add(1, 'month');
-}
-
-let previousMonthFromDate = (mom) => {
-  return mom.subtract(1, 'month');
-}
-
 export default {
   weekDays,
-  weeksFromDate,
-  followingMonthFromDate,
-  previousMonthFromDate
+  weeksFromDate
 }
