@@ -11,8 +11,12 @@ body {
   font-size: 18px;
 }
 
-h1, h2, .date, .day-header, .events-count {
+h1, h2, .date, .day-header, .events-count, a {
   font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 header {
@@ -59,12 +63,13 @@ header {
     text-align: center;
   }
 
-  button {
+  a {
     border: 2px solid white;
     color: white;
     cursor: pointer;
     background-color: lighten(#111, 10%);
     padding: 0.5em;
+    font-size: 0.8em;
 
     &:hover {
       background-color: lighten(#111, 20%);

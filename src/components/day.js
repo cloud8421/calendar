@@ -35,7 +35,7 @@ class Day extends React.Component {
 }
 
 Day.propTypes = {
-  day: PropTypes.date,
+  day: PropTypes.mom,
   selected: React.PropTypes.bool
 };
 

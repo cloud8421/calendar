@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import moment from 'moment';
 import State from '../state';
 import Month from './month';
 import Actions from '../actions';
@@ -13,14 +14,14 @@ let getState = () => {
   }
 }
 
+let setMonth = (params) => {
+  let curDate = moment(new Date(params.year, params.month - 1, 1));
+  Actions.setCurrentDay(curDate);
+}
+
 class MonthContainer extends React.Component {
   constructor(props) {
     super(props);
-    if (props.params) {
-      let p = props.params;
-      let curDate = new Date(p.year, p.month, 1);
-      Actions.setCurrentDay(curDate);
-    }
     this.state = getState();
   }
   render() {
@@ -35,7 +36,11 @@ class MonthContainer extends React.Component {
       return <div className="loading">Loading</div>
     }
   }
+  componentWillReceiveProps(props) {
+    if (props.params) { setMonth(props.params) }
+  }
   componentDidMount() {
+    if (this.props.params) { setMonth(this.props.params) }
     startDateCursor.on('update', () => {
       this.setState(getState());
     })

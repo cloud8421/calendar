@@ -1,10 +1,10 @@
 import appDispatcher from './dispatcher';
 
 const Actions = {
-  setCurrentDay(date) {
+  setCurrentDay(mom) {
     appDispatcher.dispatch({
       actionType: 'set-current-date',
-      value: date
+      value: mom
     });
   },
   forwardOneMonth() {

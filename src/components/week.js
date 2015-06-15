@@ -21,7 +21,7 @@ class Week extends React.Component {
 Week.propTypes = {
   week: React.PropTypes.arrayOf(
             React.PropTypes.shape({
-              day: PropTypes.date,
+              day: PropTypes.mom,
               selected: React.PropTypes.boolean
             }))
 };

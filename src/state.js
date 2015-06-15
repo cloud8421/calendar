@@ -2,11 +2,11 @@ import moment from 'moment';
 import Baobab from 'baobab';
 import AppDispatcher from './dispatcher';
 
-let toBeginningOfMonth = function(d) {
-  return moment(d).date(1)._d;
+let toBeginningOfMonth = function(mom) {
+  return mom.date(1);
 }
 
-let currentDate = new Date();
+let currentDate = moment();
 
 let State = new Baobab({
   startDate: null,
@@ -40,15 +40,11 @@ let State = new Baobab({
 })
 
 let incOneMonth = (current) => {
-  return moment(current)
-         .add(1, 'month')
-         ._d
+  return current.add(1, 'month')
 }
 
 let decOneMonth = (current) => {
-  return moment(current)
-         .subtract(1, 'month')
-         ._d
+  return current.subtract(1, 'month')
 }
 
 let startDateCursor = State.select('startDate');

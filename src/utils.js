@@ -13,8 +13,8 @@ let weekDays = () => {
   return rotate(moment.weekdaysShort())
 }
 
-let isSameDay = (d1, d2) => {
-  return moment(d1).isSame(d2, 'day');
+let isSameDay = (mom1, mom2) => {
+  return mom1.isSame(mom2, 'day');
 }
 
 let dateToDayPair = (d, now) => {
@@ -24,19 +24,20 @@ let dateToDayPair = (d, now) => {
   }
 }
 
-let weeksFromDate = (d, now) => {
+let weeksFromDate = (mom, now) => {
+  let d = mom._d;
   return Cal.monthDates(d.getFullYear(),
                        d.getMonth(),
-                       (curDate) => dateToDayPair(curDate, now),
+                       (curDate) => dateToDayPair(moment(curDate), now),
                        (curWeek) => curWeek)
 }
 
-let followingMonthFromDate = (d) => {
-  return moment(d).add(1, 'month');
+let followingMonthFromDate = (mom) => {
+  return mom.add(1, 'month');
 }
 
-let previousMonthFromDate = (d) => {
-  return moment(d).subtract(1, 'month');
+let previousMonthFromDate = (mom) => {
+  return mom.subtract(1, 'month');
 }
 
 export default {

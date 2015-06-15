@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import {Link} from 'react-router';
 
 import Actions from '../actions';
 import Week from './week';
@@ -25,16 +26,27 @@ class Month extends React.Component {
     let weekComponents = weeks.map((week, idx) => {
       return <Week week={week} key={idx} />
     });
-    let monthName = moment(this.props.startDate).format('MMMM YYYY');
-    let nextLabel = U.followingMonthFromDate(this.props.startDate).format('MMM YYYY');
-    let prevLabel = U.previousMonthFromDate(this.props.startDate).format('MMM YYYY');
+
+    let startDate = this.props.startDate._d
+    let nextMonth = moment(startDate).add(1, 'month');
+    let prevMonth = moment(startDate).subtract(1, 'month');
+
+    let monthName = moment(startDate).format('MMMM YYYY');
 
     return (
       <div className="month">
         <header>
-          <button onClick={Actions.backOneMonth}>{prevLabel}</button>
+          <Link to="month" params={{
+              year: prevMonth.year(),
+              month: prevMonth.month() + 1}}>
+            {prevMonth.format('MMM YYYY')}
+          </Link>
           <h2>{monthName}</h2>
-          <button onClick={Actions.forwardOneMonth}>{nextLabel}</button>
+          <Link to="month" params={{
+              year: nextMonth.year(),
+              month: nextMonth.month() + 1}}>
+            {nextMonth.format('MMM YYYY')}
+          </Link>
         </header>
         <MonthHeaders />
         {weekComponents}
