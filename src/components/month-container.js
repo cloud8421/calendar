@@ -7,6 +7,7 @@ import Loading from './loading';
 
 let startDateCursor;
 let currentDateCursor;
+let openDetailsCursor;
 
 let getState = () => {
   return {

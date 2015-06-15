@@ -16,6 +16,12 @@ const Actions = {
     appDispatcher.dispatch({
       actionType: 'back-one-month'
     });
+  },
+  openDetails(mom) {
+    appDispatcher.dispatch({
+      actionType: 'open-details',
+      value: mom
+    })
   }
 }
 

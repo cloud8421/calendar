@@ -11,6 +11,7 @@ let currentDate = moment();
 let State = new Baobab({
   startDate: null,
   currentDate: currentDate,
+  currentDetails: null,
   events: [
     {
       id: 1,
@@ -49,6 +50,10 @@ let decOneMonth = (current) => {
 
 let startDateCursor = State.select('startDate');
 
+startDateCursor.on('update', () => {
+  State.set('currentDetails', null);
+});
+
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
     case 'forward-one-month':
@@ -59,6 +64,9 @@ AppDispatcher.register((payload) => {
       break;
     case 'set-current-date':
       State.set('startDate', payload.value);
+      break;
+    case 'open-details':
+      State.set('currentDetails', payload.value);
       break;
     default:
       return true

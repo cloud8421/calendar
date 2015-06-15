@@ -34,5 +34,6 @@ let weeksFromDate = (mom, now) => {
 
 export default {
   weekDays,
-  weeksFromDate
+  weeksFromDate,
+  isSameDay
 }

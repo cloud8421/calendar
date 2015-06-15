@@ -90,6 +90,7 @@ header {
   border: 1px solid white;
   background-color: #eee;
   position: relative;
+  cursor: pointer;
 
   &.selected {
     background-color: darken(#eee, 30%);
@@ -128,4 +129,14 @@ header {
   border: 1px solid white;
   background-color: lighten(#111, 30%);
   color: white;
+}
+
+.day-details {
+  position: absolute;
+  z-index: 1;
+  top: 0.5em;
+  left: 0.5em;
+  width: 10em;
+  background-color: #ccc;
+  padding: 1em;
 }

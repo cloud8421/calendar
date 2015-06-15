@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {PropTypes} from 'react';
 
 let date = (props, propName, componentName) => {
   if (!moment.isDate(props[propName])) {
@@ -12,7 +13,15 @@ let mom = (props, propName, componentName) => {
   }
 }
 
+let evt = PropTypes.shape({
+  id: PropTypes.number,
+  name: PropTypes.string,
+  startsAt: PropTypes.date,
+  endsAt: PropTypes.date
+})
+
 export default {
   date,
-  mom
+  mom,
+  evt
 }
