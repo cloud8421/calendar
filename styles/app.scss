@@ -94,7 +94,7 @@ header {
 
 .events-count {
   position: absolute;
-  right: 0.2em;
+  right: 0.3em;
   bottom: 0.3em;
   background-color: #F03025;
   color: white;
@@ -102,8 +102,10 @@ header {
   border-radius: 50%;
   width: 1.1em;
   height: 1.1em;
+  line-height: 1.1em;
   text-align: center;
   display: block;
+  padding: 0.2em;
 }
 
 .day-header {
