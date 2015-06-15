@@ -42,10 +42,8 @@ class MonthContainer extends React.Component {
   render() {
     if (this.state.startDate && this.state.currentDate) {
       return (
-        <section className="calendar">
-          <Month startDate={this.state.startDate}
-                 currentDate={this.state.currentDate} />
-        </section>
+        <Month startDate={this.state.startDate}
+               currentDate={this.state.currentDate} />
       );
     } else {
       return <Loading />;

@@ -10,11 +10,7 @@ class Week extends React.Component {
                   key={idx} />
     });
 
-    return (
-      <div className="week">
-        {days}
-      </div>
-    )
+    return <ul className="days">{days}</ul>
   }
 }
 

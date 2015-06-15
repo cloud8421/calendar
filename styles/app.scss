@@ -2,141 +2,104 @@
 
 $day-size: 4em;
 
+$ui-background: rgba(58, 58, 58, 0.7);
+$ui-color: white;
+
 * {
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-size: 18px;
-}
-
-h1, h2, .date, .day-header, .events-count, a {
-  font-family: Helvetica, Arial, sans-serif;
+h1, a, li {
+  font-family: 'Roboto', sans-serif;
+  color: $ui-color;
 }
 
 a {
   text-decoration: none;
 }
 
-header {
-  background-color: #111;
+li {
+  list-style-type: none;
 }
 
-.main-nav {
+body {
+  font-size: 18px;
+  min-height: 100vh;
+  background-image: url('/images/background.jpg');
   @include display(flex);
-  @include align-items(center);
-  padding: 0.5em;
+  @include flex-direction(column);
 }
 
-.logo {
-  width: 2em;
-  height: 2em;
-  margin-right: 1em;
-}
-
-.title {
-  color: #ccc;
+#main {
+  @include display(flex);
 }
 
 .calendar {
-  width: $day-size * 7;
-  margin: 0 auto;
+  @include flex-grow(2);
+  min-height: 100vh;
+  background-color: $ui-background;
+}
+
+.workspace {
+  @include flex-grow(3);
+}
+
+.container {
+  width: 100%;
+}
+
+.month-switcher {
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(space-between);
+  padding: 1em;
+
+  a {
+    font-size: 2em;
+  }
+}
+
+.month-container {
+  @include display(flex);
 }
 
 .month {
-  margin-top: 1em;
   @include display(flex);
   @include justify-content(flex-start);
   @include flex-direction(column);
+  padding: 0 1em;
+}
 
-  header {
+.calendar ul {
+  @include display(flex);
+  padding-left: 0.75%;
+  padding-right: 0.75%;
+
+  li {
     @include display(flex);
-    @include justify-content(space-between);
+    @include justify-content(center);
     @include align-items(center);
-    padding: 0.4em;
-    border: 1px solid white;
-  }
-
-  h2 {
-    color: #ccc;
+    width: 14.00%;
     text-align: center;
-  }
-
-  a {
-    border: 2px solid white;
-    color: white;
-    cursor: pointer;
-    background-color: lighten(#111, 10%);
-    padding: 0.5em;
-    font-size: 0.8em;
-
-    &:hover {
-      background-color: lighten(#111, 20%);
-    }
+    height: 3em;
   }
 }
 
-.week, .week-header {
-  @include display(flex);
-}
+.day-names {
+  border-top: 1px solid $ui-color;
+  border-bottom: 1px solid $ui-color;
 
-.day {
-  @include display(flex);
-  @include justify-content(center);
-  @include align-items(center);
-  width: $day-size;
-  height: $day-size;
-  border: 1px solid white;
-  background-color: #eee;
-  position: relative;
-  cursor: pointer;
-
-  &.selected {
-    background-color: darken(#eee, 30%);
-    color: white;
+  li {
+    text-transform: uppercase;
   }
 }
 
-.loading {
-  @include display(flex);
-  @include justify-content(center);
-  @include align-items(center);
-  min-height: 20em;
-  background-color: #eee;
-}
-
-.events-count {
-  position: absolute;
-  right: 0.3em;
-  bottom: 0.3em;
-  background-color: #F03025;
-  color: white;
-  font-size: 0.7em;
-  border-radius: 50%;
-  width: 1.1em;
-  height: 1.1em;
-  line-height: 1.1em;
-  text-align: center;
-  display: block;
-  padding: 0.2em;
-}
-
-.day-header {
-  width: $day-size;
-  text-align: center;
-  padding: 0.4em;
-  border: 1px solid white;
-  background-color: lighten(#111, 30%);
-  color: white;
-}
-
-.day-details {
-  position: absolute;
-  z-index: 1;
-  top: 0.5em;
-  left: 0.5em;
-  width: 10em;
-  background-color: #ccc;
-  padding: 1em;
+.selected {
+  .date {
+    border-radius: 50%;
+    background-color: rgba(56, 144, 188, 0.8);
+    color: $ui-color;
+    padding: 0.8em;
+  }
 }

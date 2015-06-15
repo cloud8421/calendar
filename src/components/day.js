@@ -37,11 +37,11 @@ class Day extends React.Component {
     }
 
     return (
-      <div className={dayClass(selected)} onClick={this.openDetails.bind(this)}>
+      <li className={dayClass(selected)} onClick={this.openDetails.bind(this)}>
         <span className="date">{day}</span>
         {eventsCount}
         {this.state.open ? <Details events={dayEvents} day={this.props.day} /> : ''}
-      </div>
+      </li>
     )
   }
   componentWillMount() {

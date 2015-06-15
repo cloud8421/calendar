@@ -10,12 +10,10 @@ class MonthHeaders extends React.Component {
   shouldComponentUpdate() { return false }
   render() {
     let labels = U.weekDays().map((day) => {
-      return <div className='day-header' key={day}>{day}</div>
+      return <li key={day}>{day}</li>
     });
     return (
-      <div className='week-header'>
-        {labels}
-      </div>
+      <ul className="day-names">{labels}</ul>
     )
   }
 }
@@ -34,22 +32,27 @@ class Month extends React.Component {
     let monthName = moment(startDate).format('MMMM YYYY');
 
     return (
-      <div className="month">
-        <header>
-          <Link to="month" params={{
-              year: prevMonth.year(),
-              month: prevMonth.month() + 1}}>
-            {prevMonth.format('MMM YYYY')}
-          </Link>
-          <h2>{monthName}</h2>
-          <Link to="month" params={{
-              year: nextMonth.year(),
-              month: nextMonth.month() + 1}}>
-            {nextMonth.format('MMM YYYY')}
-          </Link>
-        </header>
-        <MonthHeaders />
-        {weekComponents}
+      <div className="month-container">
+        <section className="calendar">
+          <nav className="month-switcher">
+            <Link to="month" params={{
+                year: prevMonth.year(),
+                month: prevMonth.month() + 1}}>
+              &lt;
+            </Link>
+            <h1>{monthName}</h1>
+            <Link to="month" params={{
+                year: nextMonth.year(),
+                month: nextMonth.month() + 1}}>
+              &gt;
+            </Link>
+          </nav>
+          <section className="month">
+            <MonthHeaders />
+            {weekComponents}
+          </section>
+        </section>
+        <section className="workspace"></section>
       </div>
     )
   }
