@@ -1,48 +1,8 @@
 import React from 'react';
-import Month from './components/month';
-import State from './state';
+import Router from 'react-router';
 
-let container = document.getElementById('main');
+import Routes from "./routes.js";
 
-let startDateCursor = State.select('startDate');
-let currentDateCursor = State.select('currentDate');
-
-let getState = () => {
-  return {
-    startDate: startDateCursor.get(),
-    currentDate: currentDateCursor.get()
-  }
-}
-
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = getState();
-  }
-  render() {
-    return (
-      <div className="container">
-        <header>
-          <nav className="main-nav">
-            <img className="logo" src="/images/calendar.png" alt="logo" />
-            <h1 className="title">Calendar</h1>
-          </nav>
-        </header>
-        <section className="calendar">
-          <Month startDate={this.state.startDate}
-                 currentDate={this.state.currentDate} />
-        </section>
-      </div>
-    );
-  }
-  componentDidMount() {
-    startDateCursor.on('update', () => {
-      this.setState(getState());
-    })
-    currentDateCursor.on('update', () => {
-      this.setState(getState());
-    })
-  }
-}
-
-React.render(<Main />, container);
+Router.run(Routes, (Handler) => {
+  React.render(<Handler />, document.getElementById('main'));
+});
