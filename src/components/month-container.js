@@ -8,13 +8,13 @@ import Loading from './loading';
 let startDateCursor;
 let currentDateCursor;
 let openDetailsCursor;
-let eventsCursor;
+let clusteredEventsCursor;
 
 let getState = () => {
   return {
     startDate: startDateCursor.get(),
     currentDate: currentDateCursor.get(),
-    events: eventsCursor.get(),
+    clusteredEvents: clusteredEventsCursor.get(),
   }
 }
 
@@ -33,34 +33,21 @@ let setMonth = (params) => {
   Actions.setCurrentDay(curDate);
 }
 
-let getEventsForMonth = (beginning) => {
-  return eventsCursor.get().filter((ev) => {
-    console.log(ev.startsAt)
-      console.log(beginning._d)
-    let result = moment(ev.startsAt).isBetween(beginning._d, beginning.endOf('month')._d);
-    return result;
-  });
-}
-
 class MonthContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: null,
-      currentDate: null
+      currentDate: null,
+      clusteredEvents: {}
     }
   }
   render() {
     if (this.state.startDate && this.state.currentDate) {
-      // let events = getEventsForMonth(this.state.startDate);
-      let clustered = clusterEvents(this.state.startDate);
-      console.log(clustered);
-
-      // console.log(events.length);
-
       return (
         <Month startDate={this.state.startDate}
-               currentDate={this.state.currentDate} />
+               currentDate={this.state.currentDate}
+               events={this.state.clusteredEvents} />
       );
     } else {
       return <Loading />;
@@ -69,17 +56,18 @@ class MonthContainer extends React.Component {
   componentWillMount() {
     startDateCursor   = State.select('startDate');
     currentDateCursor = State.select('currentDate');
-    eventsCursor = State.select('events');
+    clusteredEventsCursor = State.select('clusteredEvents');
   }
   componentWillUnmount() {
     startDateCursor.release();
     currentDateCursor.release();
-    eventsCursor.release();
+    clusteredEventsCursor.release();
   }
   componentWillReceiveProps(props) {
     if (props.params) { setMonth(props.params) }
   }
   componentDidMount() {
+    Actions.getEvents();
     if (this.props.params) { setMonth(this.props.params) }
 
     this.setState(getState());

@@ -22,7 +22,7 @@ class Month extends React.Component {
   render() {
     let weeks = U.weeksFromDate(this.props.startDate, this.props.currentDate);
     let weekComponents = weeks.map((week, idx) => {
-      return <Week week={week} key={idx} />
+      return <Week week={week} key={idx} events={this.props.events} />
     });
 
     let startDate = this.props.startDate._d

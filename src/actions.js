@@ -22,6 +22,11 @@ const Actions = {
       actionType: 'open-details',
       value: mom
     })
+  },
+  getEvents() {
+    appDispatcher.dispatch({
+      actionType: 'get-events'
+    });
   }
 }
 

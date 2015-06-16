@@ -11,10 +11,17 @@ class Day extends React.Component {
   render() {
     let day = moment(this.props.day).format('D');
     let selected = this.props.selected;
+    let events = this.props.events;
+    let eventsCount;
+
+    if (events.length > 0) {
+      eventsCount = <span className="events-badge">x</span>;
+    }
 
     return (
       <li className={dayClass(selected)} onClick={this.openDetails.bind(this)}>
         <span className="date">{day}</span>
+        {eventsCount}
       </li>
     )
   }

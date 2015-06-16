@@ -37,13 +37,13 @@ body {
 }
 
 .calendar {
-  @include flex-grow(2);
+  width: 30%;
   min-height: 100vh;
   background-color: $ui-background;
 }
 
 .workspace {
-  @include flex-grow(3);
+  width: 70%;
 }
 
 .container {
@@ -109,4 +109,21 @@ body {
     background-color: rgba(56, 144, 188, 0.8);
     padding: 0.8em;
   }
+}
+
+.day {
+  position: relative;
+}
+
+.events-badge {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  background-color: orange;
+  color: transparent;
+  border-radius: 50%;
+  font-size: 0.5em;
+  line-height: 0.5em;
+  width: 0.5em;
+  height: 0.5em;
 }
