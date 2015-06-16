@@ -18,8 +18,6 @@ let State = new Baobab({
   },
   stateOpts);
 
-window.State = State;
-
 let incOneMonth = (current) => {
   return current.add(1, 'month')
 }

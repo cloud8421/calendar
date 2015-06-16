@@ -89,7 +89,6 @@ class MonthContainer extends React.Component {
     currentDetailsCursor.on('update', () => {
       this.setState(getState());
     })
-    Actions.openDetails(moment('2015-06-10'));
   }
 }
 
