@@ -1,7 +1,7 @@
 import moment from 'moment';
 import Baobab from 'baobab';
 import AppDispatcher from './dispatcher';
-import Transport from './transport';
+import Transport from './ajax-transport';
 
 let currentDate = moment();
 
@@ -71,7 +71,7 @@ AppDispatcher.register((payload) => {
       State.set('currentDetails', payload.value);
       break;
     case 'get-events':
-      Transport.fetch((data) => {
+      Transport.fetchEvents((data) => {
         State.set('events', data);
         State.set('clusteredEvents', clusterEvents(data));
       });
