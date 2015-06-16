@@ -76,19 +76,22 @@ class MonthContainer extends React.Component {
     if (props.params) { setMonth(props.params) }
   }
   componentDidMount() {
-    Actions.getEvents();
     if (this.props.params) { setMonth(this.props.params) }
 
     this.setState(getState());
     startDateCursor.on('update', () => {
       this.setState(getState());
-    })
+    });
     currentDateCursor.on('update', () => {
       this.setState(getState());
-    })
+    });
     currentDetailsCursor.on('update', () => {
       this.setState(getState());
-    })
+    });
+    clusteredEventsCursor.on('update', () => {
+      this.setState(getState());
+    });
+    Actions.getEvents();
   }
 }
 
