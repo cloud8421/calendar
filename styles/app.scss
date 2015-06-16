@@ -34,26 +34,23 @@ body {
 
 #main {
   @include display(flex);
+  @include flex(1);
 }
 
 .calendar {
-  width: 30%;
-  min-height: 100vh;
+  @include flex-grow(1);
   background-color: $ui-background;
 }
 
 .workspace {
-  width: 70%;
-}
-
-.container {
-  width: 100%;
+  @include flex-grow(9);
 }
 
 .month-switcher {
   @include display(flex);
   @include align-items(center);
   @include justify-content(space-between);
+  min-width: 18em;
   padding: 1em;
 
   a {
@@ -63,6 +60,7 @@ body {
 
 .month-container {
   @include display(flex);
+  @include flex(1);
 }
 
 .month {
