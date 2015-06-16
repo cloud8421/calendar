@@ -9,10 +9,10 @@ const DATE_FORMAT = 'dddd, MMMM Do YYYY'
 class Details extends React.Component {
   render() {
     return (
-      <div className="day-details">
-        <h1>{this.props.day.format(DATE_FORMAT)}</h1>
+      <section className="day-details">
+        <h3>{this.props.day.format(DATE_FORMAT)}</h3>
         <EventList events={this.props.events} />
-      </div>
+      </section>
     )
   }
 }

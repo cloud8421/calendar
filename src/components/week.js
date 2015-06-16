@@ -1,19 +1,7 @@
 import React from 'react';
 import PropTypes from '../prop-types';
 import Day from './day';
-
-let eventsForDay = (day, events) => {
-  let year = day.year();
-  let month = day.month();
-  let date = day.date();
-  let yearMonthKey = `${year}-${month}`;
-
-  if (events[yearMonthKey] && events[yearMonthKey][date]) {
-    return events[yearMonthKey][date];
-  } else {
-    return [];
-  }
-}
+import {eventsForDay} from '../utils';
 
 class Week extends React.Component {
   render() {

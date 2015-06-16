@@ -9,12 +9,14 @@ let startDateCursor;
 let currentDateCursor;
 let openDetailsCursor;
 let clusteredEventsCursor;
+let currentDetailsCursor;
 
 let getState = () => {
   return {
     startDate: startDateCursor.get(),
     currentDate: currentDateCursor.get(),
     clusteredEvents: clusteredEventsCursor.get(),
+    currentDetails: currentDetailsCursor.get()
   }
 }
 
@@ -39,15 +41,20 @@ class MonthContainer extends React.Component {
     this.state = {
       startDate: null,
       currentDate: null,
+      currentDetails: null,
       clusteredEvents: {}
     }
   }
   render() {
     if (this.state.startDate && this.state.currentDate) {
       return (
-        <Month startDate={this.state.startDate}
-               currentDate={this.state.currentDate}
-               events={this.state.clusteredEvents} />
+        <div className="month-container">
+          <Month startDate={this.state.startDate}
+                 currentDate={this.state.currentDate}
+                 events={this.state.clusteredEvents}
+                 details={this.state.currentDetails} />
+          <section className="workspace"></section>
+        </div>
       );
     } else {
       return <Loading />;
@@ -57,11 +64,13 @@ class MonthContainer extends React.Component {
     startDateCursor   = State.select('startDate');
     currentDateCursor = State.select('currentDate');
     clusteredEventsCursor = State.select('clusteredEvents');
+    currentDetailsCursor = State.select('currentDetails');
   }
   componentWillUnmount() {
     startDateCursor.release();
     currentDateCursor.release();
     clusteredEventsCursor.release();
+    currentDetailsCursor.release();
   }
   componentWillReceiveProps(props) {
     if (props.params) { setMonth(props.params) }
@@ -77,6 +86,10 @@ class MonthContainer extends React.Component {
     currentDateCursor.on('update', () => {
       this.setState(getState());
     })
+    currentDetailsCursor.on('update', () => {
+      this.setState(getState());
+    })
+    Actions.openDetails(moment('2015-06-10'));
   }
 }
 

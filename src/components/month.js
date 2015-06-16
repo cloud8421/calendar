@@ -1,22 +1,13 @@
 import React from 'react';
 import moment from 'moment';
-import {Link} from 'react-router';
 
 import Actions from '../actions';
 import Week from './week';
 import U from '../utils';
 
-class MonthHeaders extends React.Component {
-  shouldComponentUpdate() { return false }
-  render() {
-    let labels = U.weekDays().map((day) => {
-      return <li key={day}>{day}</li>
-    });
-    return (
-      <ul className="day-names">{labels}</ul>
-    )
-  }
-}
+import MonthSwitcher from './month/switcher';
+import MonthHeaders from './month/headers';
+import Details from './day/details';
 
 class Month extends React.Component {
   render() {
@@ -25,35 +16,23 @@ class Month extends React.Component {
       return <Week week={week} key={idx} events={this.props.events} />
     });
 
-    let startDate = this.props.startDate._d
-    let nextMonth = moment(startDate).add(1, 'month');
-    let prevMonth = moment(startDate).subtract(1, 'month');
+    let detailsComponent;
+    let detailsDay = this.props.details;
 
-    let monthName = moment(startDate).format('MMMM YYYY');
+    if (detailsDay) {
+      let eventsForDetails = U.eventsForDay(detailsDay, this.props.events);
+      detailsComponent = <Details day={detailsDay} events={eventsForDetails} />
+    }
 
     return (
-      <div className="month-container">
-        <section className="calendar">
-          <nav className="month-switcher">
-            <Link to="month" params={{
-                year: prevMonth.year(),
-                month: prevMonth.month() + 1}}>
-              &lt;
-            </Link>
-            <h1>{monthName}</h1>
-            <Link to="month" params={{
-                year: nextMonth.year(),
-                month: nextMonth.month() + 1}}>
-              &gt;
-            </Link>
-          </nav>
-          <section className="month">
-            <MonthHeaders />
-            {weekComponents}
-          </section>
+      <section className="calendar">
+        <MonthSwitcher startDate={this.props.startDate} />
+        <section className="month">
+          <MonthHeaders />
+          {weekComponents}
         </section>
-        <section className="workspace"></section>
-      </div>
+        {detailsComponent}
+      </section>
     )
   }
 }

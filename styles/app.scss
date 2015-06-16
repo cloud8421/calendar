@@ -10,13 +10,15 @@ $day-size: 4em;
 
 $ui-background: rgba(58, 58, 58, 0.7);
 $ui-color: white;
+$ui-accent-color-transparent: rgba(65, 176, 225, 0.8);
+$ui-accent-color: rgb(65, 176, 225);
 
 * {
   margin: 0;
   padding: 0;
 }
 
-h1, a, li, span {
+h1, h3, a, li, span, p {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: $ui-color;
@@ -85,41 +87,43 @@ body {
     font-size: 2em;
   }
 
-  ul {
-    @include display(flex);
-    padding-left: 0.75%;
-    padding-right: 0.75%;
+}
 
-    li {
-      @include display(flex);
-      @include justify-content(center);
-      @include align-items(center);
-      width: 14.00%;
-      text-align: center;
-      height: 3em;
-    }
-  }
+.days, .day-names {
+  @include display(flex);
+  padding-left: 0.75%;
+  padding-right: 0.75%;
+}
+
+.day, .day-name {
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
+  width: 14.00%;
+  text-align: center;
+  height: 3em;
+}
+
+.day {
+  position: relative;
+  cursor: pointer;
 }
 
 .day-names {
   border-top: 1px solid $ui-color;
   border-bottom: 1px solid $ui-color;
-
-  li {
-    text-transform: uppercase;
-  }
 }
 
-.selected {
+.day-name {
+  text-transform: uppercase;
+}
+
+.today {
   .date {
     border-radius: 50%;
-    background-color: rgba(56, 144, 188, 0.8);
+    background-color: $ui-accent-color-transparent;
     padding: 0.8em;
   }
-}
-
-.day {
-  position: relative;
 }
 
 .events-badge {
@@ -133,4 +137,27 @@ body {
   line-height: 0.5em;
   width: 0.5em;
   height: 0.5em;
+}
+
+.day-details {
+  border-top: 1px solid $ui-color;
+  margin-top: 1em;
+  padding: 1em;
+
+  h3 {
+    margin-bottom: 1em;
+  }
+}
+
+.day-detail {
+  font-size: 0.8em;
+  height: 2em;
+
+  .description {
+    margin-left: 1em;
+  }
+}
+
+.when *{
+  color: $ui-accent-color;
 }

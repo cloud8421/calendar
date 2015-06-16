@@ -32,8 +32,24 @@ let weeksFromDate = (mom, now) => {
                        (curWeek) => curWeek)
 }
 
+let eventsForDay = (day, events) => {
+  if (!day) return [];
+  let year = day.year();
+  let month = day.month();
+  let date = day.date();
+  let yearMonthKey = `${year}-${month}`;
+
+  if (events[yearMonthKey] && events[yearMonthKey][date]) {
+    return events[yearMonthKey][date];
+  } else {
+    return [];
+  }
+}
+
+
 export default {
   weekDays,
   weeksFromDate,
-  isSameDay
+  isSameDay,
+  eventsForDay
 }

@@ -2,20 +2,25 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from '../../prop-types';
 
-let formatDate = (d) => {
-  // return
+const TIME_FORMAT = 'LT'
+
+let formatTime = (d) => {
+  return moment(d).format(TIME_FORMAT);
 }
+
 
 class Event extends React.Component {
   render() {
     let evt = this.props.event;
 
     return (
-      <li>
-        <span className="description">{evt.name}</span>
+      <li className="day-detail">
         <span className="when">
-          <time>{evt.startsAt}</time> - <time>{evt.endsAt}</time>
+          <time dateTime={evt.startsAt}>{formatTime(evt.startsAt)}</time>
+          <span> - </span>
+          <time dateTime={evt.startsAt}>{formatTime(evt.endsAt)}</time>
         </span>
+        <span className="description">{evt.name}</span>
       </li>
     )
   }

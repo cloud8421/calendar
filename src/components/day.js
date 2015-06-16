@@ -4,7 +4,7 @@ import PropTypes from '../prop-types';
 import Actions from '../actions';
 
 let dayClass = (selected) => {
-  return selected ? 'day selected' : 'day'
+  return selected ? 'day today' : 'day'
 }
 
 class Day extends React.Component {
