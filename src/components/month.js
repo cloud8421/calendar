@@ -8,6 +8,7 @@ import U from '../utils';
 import MonthSwitcher from './month/switcher';
 import MonthHeaders from './month/headers';
 import Details from './day/details';
+import AddNewEvent from './add-new-event';
 
 class Month extends React.Component {
   render() {
@@ -32,6 +33,7 @@ class Month extends React.Component {
           {weekComponents}
         </section>
         {detailsComponent}
+        <AddNewEvent />
       </section>
     )
   }
