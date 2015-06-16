@@ -19,7 +19,7 @@ $ui-accent-color: rgb(65, 176, 225);
   padding: 0;
 }
 
-h1, h3, a, li, span, p {
+h1, h3, a, li, span, p, label, input {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: $ui-color;
@@ -44,6 +44,21 @@ body {
   }
 }
 
+label {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid $ui-color;
+  background-color: lighten($ui-background, 20%);
+  color: $ui-color;
+  font-size: 1em;
+  padding: 1em;
+  display: inline-block;
+}
+
 #main {
   @include display(flex);
   @include flex(1);
@@ -57,8 +72,9 @@ body {
 
 .workspace {
   @include display(flex);
-  @include align-items(flex-end);
   @include flex-grow(9);
+  @include flex-direction(column);
+  padding: 1em;
 }
 
 .month-switcher {
@@ -193,4 +209,17 @@ body {
   &:hover {
     background-color: $ui-color-transparent;
   }
+}
+
+.event-form {
+  @include display(flex);
+  @include flex-grow(1);
+  @include flex-direction(column);
+  background-color: $ui-background;
+  padding: 2em;
+}
+
+.preview {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
