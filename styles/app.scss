@@ -10,6 +10,7 @@ $day-size: 4em;
 
 $ui-background: rgba(58, 58, 58, 0.7);
 $ui-color: white;
+$ui-color-transparent: rgba(255,255,255,0.5);
 $ui-accent-color-transparent: rgba(65, 176, 225, 0.8);
 $ui-accent-color: rgb(65, 176, 225);
 
@@ -118,11 +119,20 @@ body {
   text-transform: uppercase;
 }
 
+.date {
+  border-radius: 50%;
+  padding: 0.8em;
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  &:hover {
+    background-color: $ui-color-transparent;
+  }
+}
+
 .today {
   .date {
-    border-radius: 50%;
     background-color: $ui-accent-color-transparent;
-    padding: 0.8em;
   }
 }
 
