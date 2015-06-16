@@ -1,4 +1,10 @@
 @import 'bourbon/bourbon';
+@import './mixins';
+
+$phone-portrait: 320px;
+$phone-landscape: 640px;
+$tablet-landscape: 1024px;
+$tablet-portrait: 768px;
 
 $day-size: 4em;
 
@@ -30,6 +36,9 @@ body {
   background-image: url('/images/background.jpg');
   @include display(flex);
   @include flex-direction(column);
+  @include respond-max($tablet-landscape) {
+    font-size: 14px;
+  }
 }
 
 #main {
