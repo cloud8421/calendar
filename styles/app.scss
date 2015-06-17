@@ -173,6 +173,7 @@ input {
 }
 
 .day {
+  @include flex-direction(column);
   position: relative;
   cursor: pointer;
 }
@@ -205,9 +206,8 @@ input {
 }
 
 .events-badge {
-  position: absolute;
-  right: 10%;
-  bottom: 10%;
+  margin-top: -1em;
+  display: block;
   background-color: orange;
   color: transparent;
   border-radius: 50%;
