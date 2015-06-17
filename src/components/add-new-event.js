@@ -5,7 +5,7 @@ import Actions from '../actions';
 class AddNewEvent extends React.Component {
   render() {
     return (
-      <a className="add-new-event"
+      <a className="ui add-new-event"
          onClick={Actions.openWorkspace}>+</a>
     )
   }

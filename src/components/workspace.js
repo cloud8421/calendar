@@ -34,14 +34,16 @@ class Workspace extends React.Component {
 
     if (open) {
       form = <form className="event-form">
-        <a className="close" onClick={Actions.closeWorkspace}>X</a>
+        <a className="ui close" onClick={Actions.closeWorkspace}>✕</a>
         <label htmlFor="name">What do you need to do?</label>
         <input id="name"
                type="text"
                value={this.state.text}
                onChange={this.handleChange.bind(this)} />
         {preview}
-        <Toolbar event={model} />
+        <Toolbar event={model}
+                 onOk={this.createEvent}
+                 onCancel={Actions.closeWorkspace} />
       </form>
     }
 
