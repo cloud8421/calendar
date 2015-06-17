@@ -3,6 +3,7 @@
 
 $phone-portrait: 320px;
 $phone-landscape: 640px;
+$laptop-small: 1440px;
 $tablet-landscape: 1024px;
 $tablet-portrait: 768px;
 
@@ -19,7 +20,7 @@ $ui-accent-color: rgb(65, 176, 225);
   padding: 0;
 }
 
-h1, h3, a, li, span, p, label, input {
+h1, h2, h3, a, li, span, p, label, input, dl {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: $ui-color;
@@ -39,6 +40,9 @@ body {
   background-image: url('/images/background.jpg');
   @include display(flex);
   @include flex-direction(column);
+  @include respond-max($laptop-small) {
+    font-size: 16px;
+  }
   @include respond-max($tablet-landscape) {
     font-size: 14px;
   }
@@ -62,26 +66,41 @@ input {
 #main {
   @include display(flex);
   @include flex(1);
+  @include respond-max($tablet-landscape) {
+    @include flex-direction(column);
+  }
 }
 
-.calendar {
-  @include flex-grow(1);
-  position: relative;
-  background-color: $ui-background;
+.month-container {
+  @include display(flex);
+  @include flex(1);
+  @include flex-grow(3);
 }
 
 .workspace {
   @include display(flex);
-  @include flex-grow(9);
+  @include flex-grow(2);
   @include flex-direction(column);
   padding: 1em;
+}
+
+
+.calendar {
+  @include flex-grow(1);
+  position: relative;
+  padding: 10%;
+  background-color: $ui-background;
+
+  h1 {
+    font-size: 1.5em;
+  }
 }
 
 .month-switcher {
   @include display(flex);
   @include align-items(center);
   @include justify-content(space-between);
-  min-width: 18em;
+  min-width: 20%;
   padding: 1em;
 
   a {
@@ -90,24 +109,10 @@ input {
   }
 }
 
-.month-container {
-  @include display(flex);
-  @include flex(1);
-}
-
 .month {
   @include display(flex);
   @include justify-content(flex-start);
   @include flex-direction(column);
-}
-
-.calendar {
-  padding: 4em;
-
-  h1 {
-    font-size: 2em;
-  }
-
 }
 
 .days, .day-names {
@@ -140,6 +145,7 @@ input {
 }
 
 .date {
+  display: block;
   border-radius: 50%;
   padding: 0.8em;
   height: 1em;

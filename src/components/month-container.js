@@ -4,7 +4,6 @@ import State from '../state';
 import Month from './month';
 import Actions from '../actions';
 import Loading from './loading';
-import Workspace from './workspace';
 
 let startDateCursor;
 let currentDateCursor;
@@ -54,7 +53,6 @@ class MonthContainer extends React.Component {
                  currentDate={this.state.currentDate}
                  events={this.state.clusteredEvents}
                  details={this.state.currentDetails} />
-          <Workspace />
         </div>
       );
     } else {
