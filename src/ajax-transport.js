@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:9292';
+const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com';
 
 const HEADERS = {
   'Accept': 'application/vnd.calendar-v1+json'
