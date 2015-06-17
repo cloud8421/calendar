@@ -13,6 +13,7 @@ let State = new Baobab({
     startDate: null,
     currentDate: currentDate,
     currentDetails: null,
+    workspaceOpen: false,
     clusteredEvents: {},
     events: []
   },
@@ -52,6 +53,7 @@ let clusterEvents = (events) => {
 }
 
 let startDateCursor = State.select('startDate');
+let workspaceOpenCursor = State.select('workspaceOpen');
 
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
@@ -69,6 +71,12 @@ AppDispatcher.register((payload) => {
       break;
     case 'open-details':
       State.set('currentDetails', payload.value);
+      break;
+    case 'open-workspace':
+      State.set('workspaceOpen', true);
+      break;
+    case 'close-workspace':
+      State.set('workspaceOpen', false);
       break;
     case 'get-events':
       Transport.fetchEvents((data) => {

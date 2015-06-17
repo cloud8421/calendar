@@ -2,13 +2,15 @@ import React from 'react';
 import moment from 'moment';
 import chrono from 'chrono-node';
 
+import State from '../state';
+import Actions from '../actions';
 import EventModel from '../entities/event';
 import Event from './workspace/event';
 import Toolbar from './workspace/toolbar';
 
 const TIME_FORMAT = 'LT'
 
-let f = (date) => moment(date).format(TIME_FORMAT);
+let workspaceOpenCursor;
 
 class Workspace extends React.Component {
   constructor(props) {
@@ -17,33 +19,49 @@ class Workspace extends React.Component {
 
     this.state = {
       text: EventModel.sampleDescription,
-      model: newEvent
+      model: newEvent,
+      open: false
     }
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.text !== this.state.text;
   }
   render() {
     let model = this.state.model;
-    let preview;
+    let open = this.state.open;
+    let preview, form;
 
     if (model.name) {
       preview = <Event event={model} />
     }
 
+    if (open) {
+      form = <form className="event-form">
+        <a className="close" onClick={Actions.closeWorkspace}>X</a>
+        <label htmlFor="name">What do you need to do?</label>
+        <input id="name"
+               type="text"
+               value={this.state.text}
+               onChange={this.handleChange.bind(this)} />
+        {preview}
+        <Toolbar event={model} />
+      </form>
+    }
+
     return (
       <section className="workspace">
-        <form className="event-form">
-          <label htmlFor="name">What do you need to do?</label>
-          <input id="name"
-                 type="text"
-                 value={this.state.text}
-                 onChange={this.handleChange.bind(this)} />
-          {preview}
-          <Toolbar event={model} />
-        </form>
+        {form}
       </section>
     )
+  }
+  componentWillMount() {
+    workspaceOpenCursor = State.select('workspaceOpen');
+  }
+  componentWillUnmount() {
+    workspaceOpenCursor.release();
+  }
+  componentDidMount() {
+    this.setState({open: workspaceOpenCursor.get()});
+    workspaceOpenCursor.on('update', (upd) => {
+      this.setState({open: upd.data.data});
+    });
   }
   handleChange(changeEvt) {
     let newEvent = EventModel.fromVerbalDescription(changeEvt.target.value);

@@ -23,6 +23,16 @@ const Actions = {
       value: mom
     })
   },
+  openWorkspace() {
+    appDispatcher.dispatch({
+      actionType: 'open-workspace'
+    });
+  },
+  closeWorkspace() {
+    appDispatcher.dispatch({
+      actionType: 'close-workspace'
+    });
+  },
   getEvents() {
     appDispatcher.dispatch({
       actionType: 'get-events'
