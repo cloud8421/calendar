@@ -10,21 +10,20 @@ const TIME_FORMAT = 'LT'
 
 let f = (date) => moment(date).format(TIME_FORMAT);
 
-const Workspace = React.createClass({
-  getInitialState: () => {
-    // let newEvent = EventModel.build();
-    let desc = 'Coffee with friends friday from 10am to 11am';
-    let newEvent = EventModel.fromVerbalDescription(desc);
+class Workspace extends React.Component {
+  constructor(props) {
+    super(props);
+    let newEvent = EventModel.fromVerbalDescription(EventModel.sampleDescription);
 
-    return {
-      text: desc,
+    this.state = {
+      text: EventModel.sampleDescription,
       model: newEvent
     }
-  },
-  shouldComponentUpdate: function(nextProps, nextState) {
+  }
+  shouldComponentUpdate(nextProps, nextState) {
     return nextState.text !== this.state.text;
-  },
-  render: function() {
+  }
+  render() {
     let model = this.state.model;
     let preview;
 
@@ -39,20 +38,20 @@ const Workspace = React.createClass({
           <input id="name"
                  type="text"
                  value={this.state.text}
-                 onChange={this.handleChange} />
+                 onChange={this.handleChange.bind(this)} />
           {preview}
           <Toolbar event={model} />
         </form>
       </section>
     )
-  },
-  handleChange: function(changeEvt) {
+  }
+  handleChange(changeEvt) {
     let newEvent = EventModel.fromVerbalDescription(changeEvt.target.value);
     this.setState({
       text: changeEvt.target.value,
       model: newEvent
     });
   }
-});
+}
 
 export default Workspace;

@@ -1,5 +1,7 @@
 import chrono from 'chrono-node';
 
+const SAMPLE_DESCRIPTION = 'Coffee with friends friday from 10am to 11am';
+
 let build = () => {
   return {
     name: null,
@@ -29,5 +31,6 @@ let isValid = (event) => {
 export default {
   build,
   isValid,
-  fromVerbalDescription
+  fromVerbalDescription,
+  sampleDescription: SAMPLE_DESCRIPTION
 }
