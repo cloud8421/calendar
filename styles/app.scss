@@ -74,16 +74,21 @@ input {
 .month-container {
   @include display(flex);
   @include flex(1);
-  @include flex-grow(3);
+  @include flex-grow(2);
+  @include respond-min($laptop-small) {
+    max-width: 40%;
+  }
 }
 
 .workspace {
   @include display(flex);
-  @include flex-grow(2);
+  @include flex-grow(3);
   @include flex-direction(column);
   padding: 1em;
+  @include respond-min($laptop-small) {
+    max-width: 57.5%;
+  }
 }
-
 
 .calendar {
   @include flex-grow(1);
