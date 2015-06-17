@@ -2,7 +2,7 @@ import chrono from 'chrono-node';
 
 let build = () => {
   return {
-    name: 'e.g. Book dentist for friday at 9.00am',
+    name: null,
     startAt: null,
     endsAt: null
   }
@@ -15,7 +15,7 @@ let fromVerbalDescription = (desc) => {
     let data = parsed[0];
     if (data.start) newEvent.startsAt = data.start.date();
     if (data.end) newEvent.endsAt = data.end.date();
-    newEvent.name = desc;
+    newEvent.name = desc.split(data.text)[0].trim();
   }
   return newEvent;
 }

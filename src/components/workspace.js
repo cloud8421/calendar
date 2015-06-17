@@ -22,7 +22,13 @@ const Workspace = React.createClass({
     return nextState.text !== this.state.text;
   },
   render: function() {
-    let model = this.state.model
+    let model = this.state.model;
+    let preview;
+
+    if (model.name) {
+      preview = <Event event={model} />
+    }
+
     return (
       <section className="workspace">
         <form className="event-form">
@@ -31,7 +37,7 @@ const Workspace = React.createClass({
                  type="text"
                  value={this.state.text}
                  onChange={this.handleChange} />
-          <Event event={model} />
+          {preview}
         </form>
       </section>
     )
