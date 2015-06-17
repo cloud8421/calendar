@@ -176,6 +176,20 @@ input {
   @include flex-direction(column);
   position: relative;
   cursor: pointer;
+  &.with-events .date::after {
+    $size: 0.6em;
+    $radius: $size / 2;
+    margin: $radius auto;
+    content: '';
+    display: block;
+    background-color: orange;
+    color: transparent;
+    font-size: $size;
+    border-radius: $radius;
+    line-height: $size;
+    width: $size;
+    height: $size;
+  }
 }
 
 .day-names {
@@ -203,18 +217,6 @@ input {
   .date {
     background-color: $ui-accent-color-transparent;
   }
-}
-
-.events-badge {
-  margin-top: -1em;
-  display: block;
-  background-color: orange;
-  color: transparent;
-  border-radius: 50%;
-  font-size: 0.5em;
-  line-height: 0.5em;
-  width: 0.5em;
-  height: 0.5em;
 }
 
 .day-details {

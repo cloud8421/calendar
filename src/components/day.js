@@ -3,8 +3,11 @@ import moment from 'moment';
 import PropTypes from '../prop-types';
 import Actions from '../actions';
 
-let dayClass = (selected) => {
-  return selected ? 'day today' : 'day'
+let dayClass = (selected, count) => {
+  let classes = ['day']
+  if (selected) classes.push('today');
+  if (count > 0) classes.push('with-events');
+  return classes.join(' ');
 }
 
 class Day extends React.Component {
@@ -14,14 +17,9 @@ class Day extends React.Component {
     let events = this.props.events;
     let eventsCount;
 
-    if (events.length > 0) {
-      eventsCount = <span className="events-badge">x</span>;
-    }
-
     return (
-      <li className={dayClass(selected)} onClick={this.openDetails.bind(this)}>
+      <li className={dayClass(selected, events.length)} onClick={this.openDetails.bind(this)}>
         <span className="date">{day}</span>
-        {eventsCount}
       </li>
     )
   }
