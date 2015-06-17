@@ -20,7 +20,14 @@ let fromVerbalDescription = (desc) => {
   return newEvent;
 }
 
+let isValid = (event) => {
+  return event.name
+    && event.startsAt
+    && event.endsAt
+}
+
 export default {
   build,
+  isValid,
   fromVerbalDescription
 }

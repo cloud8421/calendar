@@ -4,6 +4,7 @@ import chrono from 'chrono-node';
 
 import EventModel from '../entities/event';
 import Event from './workspace/event';
+import Toolbar from './workspace/toolbar';
 
 const TIME_FORMAT = 'LT'
 
@@ -11,10 +12,12 @@ let f = (date) => moment(date).format(TIME_FORMAT);
 
 const Workspace = React.createClass({
   getInitialState: () => {
-    let newEvent = EventModel.build();
+    // let newEvent = EventModel.build();
+    let desc = 'Coffee with friends friday from 10am to 11am';
+    let newEvent = EventModel.fromVerbalDescription(desc);
 
     return {
-      text: newEvent.name,
+      text: desc,
       model: newEvent
     }
   },
@@ -38,6 +41,7 @@ const Workspace = React.createClass({
                  value={this.state.text}
                  onChange={this.handleChange} />
           {preview}
+          <Toolbar event={model} />
         </form>
       </section>
     )
