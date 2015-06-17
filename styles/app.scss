@@ -26,6 +26,9 @@ h1, h2, h3, a, li, span, p, label, input, dl {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: $ui-color;
+  @include respond-max($phone-landscape) {
+    font-weight: 500;
+  }
 }
 
 a {
@@ -123,10 +126,14 @@ input {
   position: relative;
   padding: 10%;
   background-color: $ui-background;
+  @include respond-max($tablet-landscape) {
+    padding-top: 5%;
+  }
 
   h1 {
     font-size: 1.5em;
   }
+
 }
 
 .month-switcher {
@@ -135,10 +142,12 @@ input {
   @include justify-content(space-between);
   min-width: 20%;
   padding: 1em;
+  @include respond-max($phone-landscape) {
+    padding: 0.5em;
+  }
 
   a {
     font-size: 2em;
-    font-weight: 100;
   }
 }
 
@@ -238,7 +247,10 @@ input {
   padding: 0.5em;
   border: 1px solid $ui-color;
   font-size: 3em;
-  font-weight: 100;
+
+  @include respond-max($tablet-landscape) {
+    font-size: 1.2em;
+  }
 }
 
 .event-form {
