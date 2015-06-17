@@ -1,0 +1,6 @@
+{
+  "name": "new-bamboo-calendar",
+  "root": "./_build",
+  "clean_urls": false,
+  "error_page": "error.html"
+}
