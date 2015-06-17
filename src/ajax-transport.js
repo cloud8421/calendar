@@ -1,3 +1,6 @@
+import q from 'qwest';
+import moment from 'moment';
+
 const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com';
 
 const HEADERS = {
@@ -6,23 +9,19 @@ const HEADERS = {
 
 let normalize = (events) => {
   return events.map((evt) => {
-    evt.startsAt = new Date(evt.starts_at);
-    evt.endsAt = new Date(evt.ends_at);
+    evt.startsAt = moment(evt.starts_at)._d;
+    evt.endsAt = moment(evt.ends_at)._d;
     return evt
   });
 }
 
 let fetchEvents = (cb) => {
-  let opts = { method: 'GET',
-               headers: HEADERS,
-               mode: 'cors',
-               cache: 'default' };
-  let request = new Request(`${API_URL}/events`, opts);
+  let opts = { headers: HEADERS };
+  let url = `${API_URL}/events`;
 
-  fetch(request, opts)
-    .then((resp) => resp.json())
+  q.get(url, {}, opts)
     .then((data) => normalize(data))
-    .then((norm) => cb(norm))
+    .then((norm) => cb(norm));
 }
 
 export default {
