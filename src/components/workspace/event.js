@@ -12,20 +12,24 @@ let formatTime = (d) => {
   }
 }
 
-
 class Event extends React.Component {
   render() {
     let evt = this.props.event;
 
     return (
-      <li className="day-detail">
-        <span className="when">
-          <time dateTime={evt.startsAt}>{formatTime(evt.startsAt)}</time>
-          <span> - </span>
-          <time dateTime={evt.endsAt}>{formatTime(evt.endsAt)}</time>
-        </span>
-        <span className="description">{evt.name}</span>
-      </li>
+      <section className="event-preview">
+        <h2>{evt.name}</h2>
+        <dl>
+          <dt>Starts</dt>
+          <dd>
+            <time dateTime={evt.startsAt}>{formatTime(evt.startsAt)}</time>
+          </dd>
+          <dt>Ends</dt>
+          <dd>
+            <time dateTime={evt.endsAt}>{formatTime(evt.endsAt)}</time>
+          </dd>
+        </dl>
+      </section>
     )
   }
 }

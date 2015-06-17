@@ -1,7 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import Event from '../entities/event';
 import chrono from 'chrono-node';
+
+import EventModel from '../entities/event';
+import Event from './workspace/event';
 
 const TIME_FORMAT = 'LT'
 
@@ -9,9 +11,11 @@ let f = (date) => moment(date).format(TIME_FORMAT);
 
 const Workspace = React.createClass({
   getInitialState: () => {
+    let newEvent = EventModel.build();
+
     return {
-      text: 'i.e. Book dentist for friday at 9.00am',
-      model: Event.build()
+      text: newEvent.name,
+      model: newEvent
     }
   },
   shouldComponentUpdate: function(nextProps, nextState) {
@@ -27,19 +31,13 @@ const Workspace = React.createClass({
                  type="text"
                  value={this.state.text}
                  onChange={this.handleChange} />
-          <p className="preview">
-            <ul>
-              <li>{model.name}</li>
-              <li>{model.startsAt ? f(model.startsAt) : ''}</li>
-              <li>{model.endsAt ? f(model.endsAt) : ''}</li>
-            </ul>
-          </p>
+          <Event event={model} />
         </form>
       </section>
     )
   },
   handleChange: function(changeEvt) {
-    let newEvent = Event.fromVerbalDescription(changeEvt.target.value);
+    let newEvent = EventModel.fromVerbalDescription(changeEvt.target.value);
     this.setState({
       text: changeEvt.target.value,
       model: newEvent
