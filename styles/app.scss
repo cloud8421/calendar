@@ -92,7 +92,7 @@ input {
   @include display(flex);
   @include flex(1);
   @include respond-max($tablet-landscape) {
-    @include flex-direction(column);
+    display: block;
   }
 }
 
@@ -112,6 +112,9 @@ input {
   padding: 1em;
   @include respond-min($laptop-small) {
     max-width: 57.5%;
+  }
+  @include respond-min($tablet-landscape) {
+    max-width: 50%;
   }
 }
 
