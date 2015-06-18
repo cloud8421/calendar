@@ -43,6 +43,7 @@ a {
     line-height: 1em;
     padding: 0.2em;
     cursor: pointer;
+    @include transition(all 0.1s ease-in-out);
     &:hover {
       background-color: $ui-color-transparent;
     }
