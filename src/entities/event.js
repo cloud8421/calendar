@@ -28,9 +28,50 @@ let isValid = (event) => {
     && event.endsAt
 }
 
+let groupByDay = (events) => {
+  let initial = {}
+
+  events.forEach((evt) => {
+    let start = evt.startsAt;
+    let year = start.getFullYear();
+    let month = start.getMonth();
+    let day = start.getDate();
+
+    let yearMonthKey = `${year}-${month}`;
+
+    if (!initial[yearMonthKey]) {
+      initial[yearMonthKey] = {};
+    }
+
+    if (!initial[yearMonthKey][day]) {
+      initial[yearMonthKey][day] = [evt];
+    } else {
+      initial[yearMonthKey][day].push(evt);
+    }
+  });
+
+  return initial;
+}
+
+let allInDay = (events, day) => {
+  if (!day) return [];
+  let year = day.year();
+  let month = day.month();
+  let date = day.date();
+  let yearMonthKey = `${year}-${month}`;
+
+  if (events[yearMonthKey] && events[yearMonthKey][date]) {
+    return events[yearMonthKey][date];
+  } else {
+    return [];
+  }
+}
+
 export default {
   build,
   isValid,
   fromVerbalDescription,
+  groupByDay,
+  allInDay,
   sampleDescription: SAMPLE_DESCRIPTION
 }

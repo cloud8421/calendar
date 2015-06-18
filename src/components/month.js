@@ -3,7 +3,8 @@ import moment from 'moment';
 
 import Actions from '../actions';
 import Week from './week';
-import U from '../utils';
+import {weeksFromDate} from '../utils';
+import {allInDay} from '../entities/event';
 
 import MonthSwitcher from './month/switcher';
 import MonthHeaders from './month/headers';
@@ -12,7 +13,7 @@ import AddNewEvent from './add-new-event';
 
 class Month extends React.Component {
   render() {
-    let weeks = U.weeksFromDate(this.props.startDate, this.props.currentDate);
+    let weeks = weeksFromDate(this.props.startDate, this.props.currentDate);
     let weekComponents = weeks.map((week, idx) => {
       return <Week week={week} key={idx} events={this.props.events} />
     });
@@ -21,7 +22,7 @@ class Month extends React.Component {
     let detailsDay = this.props.details;
 
     if (detailsDay) {
-      let eventsForDetails = U.eventsForDay(detailsDay, this.props.events);
+      let eventsForDetails = allInDay(this.props.events, detailsDay);
       detailsComponent = <Details day={detailsDay} events={eventsForDetails} />
     }
 

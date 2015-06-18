@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from '../prop-types';
 import Day from './day';
-import {eventsForDay} from '../utils';
+import {allInDay} from '../entities/event';
 
 class Week extends React.Component {
   render() {
     let days = this.props.week.map((dayObj, idx) => {
-      let events = eventsForDay(dayObj.day, this.props.events);
+      let events = allInDay(this.props.events, dayObj.day);
       return <Day day={dayObj.day}
                   selected={dayObj.selected}
                   key={idx}
