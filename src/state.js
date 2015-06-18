@@ -14,7 +14,6 @@ let State = new Baobab({
     currentDate: currentDate,
     currentDetails: null,
     workspaceOpen: false,
-    clusteredEvents: {},
     events: []
   },
   stateOpts);
@@ -25,31 +24,6 @@ let incOneMonth = (current) => {
 
 let decOneMonth = (current) => {
   return current.subtract(1, 'month')
-}
-
-let clusterEvents = (events) => {
-  let initial = {}
-
-  events.forEach((evt) => {
-    let start = evt.startsAt;
-    let year = start.getFullYear();
-    let month = start.getMonth();
-    let day = start.getDate();
-
-    let yearMonthKey = `${year}-${month}`;
-
-    if (!initial[yearMonthKey]) {
-      initial[yearMonthKey] = {};
-    }
-
-    if (!initial[yearMonthKey][day]) {
-      initial[yearMonthKey][day] = [evt];
-    } else {
-      initial[yearMonthKey][day].push(evt);
-    }
-  });
-
-  return initial;
 }
 
 let startDateCursor = State.select('startDate');
@@ -81,7 +55,6 @@ AppDispatcher.register((payload) => {
     case 'get-events':
       Transport.fetchEvents((data) => {
         State.set('events', data);
-        State.set('clusteredEvents', clusterEvents(data));
       });
     default:
       return true

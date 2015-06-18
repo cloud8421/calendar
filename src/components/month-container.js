@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import State from '../state';
+import MonthStore from '../stores/month';
 import Month from './month';
 import Actions from '../actions';
 import Loading from './loading';
@@ -8,14 +9,13 @@ import Loading from './loading';
 let startDateCursor;
 let currentDateCursor;
 let openDetailsCursor;
-let clusteredEventsCursor;
 let currentDetailsCursor;
 
 let getState = () => {
   return {
     startDate: startDateCursor.get(),
     currentDate: currentDateCursor.get(),
-    clusteredEvents: clusteredEventsCursor.get(),
+    groupedEvents: MonthStore.getEvents(),
     currentDetails: currentDetailsCursor.get()
   }
 }
@@ -42,7 +42,7 @@ class MonthContainer extends React.Component {
       startDate: null,
       currentDate: null,
       currentDetails: null,
-      clusteredEvents: {}
+      groupedEvents: {}
     }
   }
   render() {
@@ -51,7 +51,7 @@ class MonthContainer extends React.Component {
         <div className="month-container">
           <Month startDate={this.state.startDate}
                  currentDate={this.state.currentDate}
-                 events={this.state.clusteredEvents}
+                 events={this.state.groupedEvents}
                  details={this.state.currentDetails} />
         </div>
       );
@@ -62,14 +62,15 @@ class MonthContainer extends React.Component {
   componentWillMount() {
     startDateCursor   = State.select('startDate');
     currentDateCursor = State.select('currentDate');
-    clusteredEventsCursor = State.select('clusteredEvents');
     currentDetailsCursor = State.select('currentDetails');
   }
   componentWillUnmount() {
     startDateCursor.release();
     currentDateCursor.release();
-    clusteredEventsCursor.release();
     currentDetailsCursor.release();
+    MonthStore.removeChangeListener(() => {
+      this.setState(getState());
+    })
   }
   componentWillReceiveProps(props) {
     if (props.params) { setMonth(props.params) }
@@ -78,6 +79,9 @@ class MonthContainer extends React.Component {
     if (this.props.params) { setMonth(this.props.params) }
 
     this.setState(getState());
+    MonthStore.addChangeListener(() => {
+      this.setState(getState());
+    })
     startDateCursor.on('update', () => {
       this.setState(getState());
     });
@@ -85,9 +89,6 @@ class MonthContainer extends React.Component {
       this.setState(getState());
     });
     currentDetailsCursor.on('update', () => {
-      this.setState(getState());
-    });
-    clusteredEventsCursor.on('update', () => {
       this.setState(getState());
     });
     Actions.getEvents();
