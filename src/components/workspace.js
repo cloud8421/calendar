@@ -42,7 +42,7 @@ class Workspace extends React.Component {
                onChange={this.handleChange.bind(this)} />
         {preview}
         <Toolbar event={model}
-                 onOk={this.createEvent}
+                 onOk={this.createEvent.bind(this)}
                  onCancel={Actions.closeWorkspace} />
       </form>
     }
@@ -71,6 +71,9 @@ class Workspace extends React.Component {
       text: changeEvt.target.value,
       model: newEvent
     });
+  }
+  createEvent() {
+    Actions.createEvent(this.state.model);
   }
 }
 

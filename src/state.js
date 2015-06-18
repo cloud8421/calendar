@@ -28,6 +28,7 @@ let decOneMonth = (current) => {
 
 let startDateCursor = State.select('startDate');
 let workspaceOpenCursor = State.select('workspaceOpen');
+let eventsCursor = State.select('events');
 
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
@@ -56,6 +57,13 @@ AppDispatcher.register((payload) => {
       Transport.fetchEvents((data) => {
         State.set('events', data);
       });
+      break;
+    case 'create-event':
+      eventsCursor.apply((current) => {
+        current.push(payload.value);
+        return current;
+      });
+      break;
     default:
       return true
   }

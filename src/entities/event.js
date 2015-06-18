@@ -5,7 +5,7 @@ const SAMPLE_DESCRIPTION = 'Coffee with friends friday from 10am to 11am';
 let build = () => {
   return {
     name: null,
-    startAt: null,
+    startsAt: null,
     endsAt: null
   }
 }

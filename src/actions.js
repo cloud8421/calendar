@@ -37,6 +37,12 @@ const Actions = {
     appDispatcher.dispatch({
       actionType: 'get-events'
     });
+  },
+  createEvent(data) {
+    appDispatcher.dispatch({
+      actionType: 'create-event',
+      value: data
+    });
   }
 }
 
