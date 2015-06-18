@@ -2,10 +2,23 @@ import moment from 'moment';
 import Baobab from 'baobab';
 import AppDispatcher from './dispatcher';
 import Transport from './ajax-transport';
+import Event from './entities/event';
 
 let currentDate = moment();
 
+let facets = {
+  eventsGroupedByDay: {
+    cursors: {
+      events: ['events']
+    },
+    get: function(data) {
+      return Event.groupByDay(data.events);
+    }
+  }
+}
+
 let stateOpts = {
+  facets: facets,
   autocommit: false
 }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import State from '../state';
-import MonthStore from '../stores/month';
 import Month from './month';
 import Actions from '../actions';
 import Loading from './loading';
@@ -11,11 +10,13 @@ let currentDateCursor;
 let openDetailsCursor;
 let currentDetailsCursor;
 
+let eventsFacet = State.facets.eventsGroupedByDay;
+
 let getState = () => {
   return {
     startDate: startDateCursor.get(),
     currentDate: currentDateCursor.get(),
-    groupedEvents: MonthStore.getEvents(),
+    groupedEvents: eventsFacet.get(),
     currentDetails: currentDetailsCursor.get()
   }
 }
@@ -68,7 +69,7 @@ class MonthContainer extends React.Component {
     startDateCursor.release();
     currentDateCursor.release();
     currentDetailsCursor.release();
-    MonthStore.removeChangeListener(() => {
+    eventsFacet.off('update', () => {
       this.setState(getState());
     })
   }
@@ -79,7 +80,7 @@ class MonthContainer extends React.Component {
     if (this.props.params) { setMonth(this.props.params) }
 
     this.setState(getState());
-    MonthStore.addChangeListener(() => {
+    eventsFacet.on('update', () => {
       this.setState(getState());
     })
     startDateCursor.on('update', () => {
