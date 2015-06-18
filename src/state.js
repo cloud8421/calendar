@@ -3,8 +3,7 @@ import Baobab from 'baobab';
 import AppDispatcher from './dispatcher';
 import Transport from './ajax-transport';
 import Event from './entities/event';
-
-let currentDate = moment();
+import {incOneMonth, decOneMonth} from './utils';
 
 let facets = {
   eventsGroupedByDay: {
@@ -24,20 +23,12 @@ let stateOpts = {
 
 let State = new Baobab({
     startDate: null,
-    currentDate: currentDate,
+    currentDate: moment(),
     currentDetails: null,
     workspaceOpen: false,
     events: []
   },
   stateOpts);
-
-let incOneMonth = (current) => {
-  return current.add(1, 'month')
-}
-
-let decOneMonth = (current) => {
-  return current.subtract(1, 'month')
-}
 
 let startDateCursor = State.select('startDate');
 let workspaceOpenCursor = State.select('workspaceOpen');

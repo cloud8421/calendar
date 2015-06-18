@@ -9,6 +9,14 @@ let rotate = (array) => {
   return array;
 }
 
+let incOneMonth = (current) => {
+  return current.add(1, 'month')
+}
+
+let decOneMonth = (current) => {
+  return current.subtract(1, 'month')
+}
+
 let weekDays = () => {
   return rotate(moment.weekdaysShort())
 }
@@ -35,5 +43,7 @@ let weeksFromDate = (mom, now) => {
 export default {
   weekDays,
   weeksFromDate,
-  isSameDay
+  isSameDay,
+  incOneMonth,
+  decOneMonth
 }
