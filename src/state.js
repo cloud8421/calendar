@@ -70,9 +70,12 @@ AppDispatcher.register((payload) => {
       });
       break;
     case 'create-event':
-      eventsCursor.apply((current) => {
-        current.push(payload.value);
-        return current;
+      Transport.createEvent(payload.value, (created) => {
+        eventsCursor.apply((current) => {
+          current.push(created);
+          return current;
+        });
+        State.commit();
       });
       break;
     default:

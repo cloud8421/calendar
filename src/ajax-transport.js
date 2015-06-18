@@ -7,12 +7,14 @@ const HEADERS = {
   'Accept': 'application/vnd.calendar-v1+json'
 }
 
-let normalize = (events) => {
-  return events.map((evt) => {
-    evt.startsAt = moment(evt.starts_at)._d;
-    evt.endsAt = moment(evt.ends_at)._d;
-    return evt
-  });
+let normalizeEvent = (evt) => {
+  evt.startsAt = moment(evt.starts_at)._d;
+  evt.endsAt = moment(evt.ends_at)._d;
+  return evt
+}
+
+let normalizeEvents = (events) => {
+  return events.map((evt) => normalizeEvent(evt));
 }
 
 let fetchEvents = (cb) => {
@@ -20,10 +22,23 @@ let fetchEvents = (cb) => {
   let url = `${API_URL}/events`;
 
   q.get(url, {}, opts)
-    .then((data) => normalize(data))
+    .then((data) => normalizeEvents(data))
+    .then((norm) => cb(norm));
+}
+
+let createEvent = (evtData, cb) => {
+  let payload = {
+    name: evtData.name,
+    starts_at: evtData.startsAt.toISOString(),
+    ends_at: evtData.endsAt.toISOString()
+  };
+  let url = `${API_URL}/events`;
+  q.post(url, payload)
+    .then((data) => normalizeEvent(data))
     .then((norm) => cb(norm));
 }
 
 export default {
-  fetchEvents
+  fetchEvents,
+  createEvent
 }
