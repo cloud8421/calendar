@@ -18,7 +18,7 @@ let facets = {
 
 let stateOpts = {
   facets: facets,
-  autocommit: false
+  autoCommit: false
 }
 
 let State = new Baobab({
@@ -39,27 +39,34 @@ AppDispatcher.register((payload) => {
     case 'forward-one-month':
       startDateCursor.apply(incOneMonth);
       State.set('currentDetails', null);
+      State.commit();
       break;
     case 'back-one-month':
       startDateCursor.apply(decOneMonth);
       State.set('currentDetails', null);
+      State.commit();
       break;
     case 'set-current-date':
       State.set('startDate', payload.value);
       State.set('currentDetails', null);
+      State.commit();
       break;
     case 'open-details':
       State.set('currentDetails', payload.value);
+      State.commit();
       break;
     case 'open-workspace':
       State.set('workspaceOpen', true);
+      State.commit();
       break;
     case 'close-workspace':
       State.set('workspaceOpen', false);
+      State.commit();
       break;
     case 'get-events':
       Transport.fetchEvents((data) => {
         State.set('events', data);
+        State.commit();
       });
       break;
     case 'create-event':
@@ -71,7 +78,6 @@ AppDispatcher.register((payload) => {
     default:
       return true
   }
-  State.commit();
 });
 
 export default State;
