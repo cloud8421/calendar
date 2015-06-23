@@ -34,6 +34,29 @@ let startDateCursor = State.select('startDate');
 let workspaceOpenCursor = State.select('workspaceOpen');
 let eventsCursor = State.select('events');
 
+let addEvent = (newEvent) => {
+  eventsCursor.apply((current) => {
+    current.push(newEvent);
+    return current;
+  });
+  State.set('workspaceOpen', false);
+  State.commit();
+}
+
+let deleteEvent = (evtId) => {
+  eventsCursor.apply((current) => {
+    return current.filter((evt) => {
+      return evt.id !== evtId
+    });
+  });
+  State.commit();
+}
+
+let setError = (error, resp) => {
+  console.log(error);
+  console.log(resp);
+}
+
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
     case 'forward-one-month':
@@ -70,24 +93,10 @@ AppDispatcher.register((payload) => {
       });
       break;
     case 'create-event':
-      Transport.createEvent(payload.value, (created) => {
-        eventsCursor.apply((current) => {
-          current.push(created);
-          return current;
-        });
-        State.set('workspaceOpen', false);
-        State.commit();
-      });
+      Transport.createEvent(payload.value, addEvent, setError);
       break;
     case 'delete-event':
-      Transport.deleteEvent(payload.value, (resp) => {
-        eventsCursor.apply((current) => {
-          return current.filter((evt) => {
-            return evt.id !== payload.value.id
-          });
-        });
-        State.commit();
-      })
+      Transport.deleteEvent(payload.value, deleteEvent, setError);
       break;
     default:
       return true

@@ -1,7 +1,7 @@
 import q from 'qwest';
 import moment from 'moment';
 
-const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com';
+const API_URL = 'http://localhost:9393';
 
 const HEADERS = {
   'Accept': 'application/vnd.calendar-v1+json'
@@ -22,11 +22,11 @@ let fetchEvents = (cb) => {
   let url = `${API_URL}/events`;
 
   q.get(url, {}, opts)
-    .then((data) => normalizeEvents(data))
-    .then((norm) => cb(norm));
+    .then(normalizeEvents)
+    .then(cb);
 }
 
-let createEvent = (evtData, cb) => {
+let createEvent = (evtData, cb, errorCb) => {
   let payload = {
     name: evtData.name,
     starts_at: evtData.startsAt.toISOString(),
@@ -36,15 +36,17 @@ let createEvent = (evtData, cb) => {
   let opts = { headers: HEADERS };
   let url = `${API_URL}/events`;
   q.post(url, payload, opts)
-    .then((data) => normalizeEvent(data))
-    .then((norm) => cb(norm));
+    .then(normalizeEvent)
+    .then(cb)
+    .catch(errorCb);
 }
 
-let deleteEvent = (evt, cb) => {
+let deleteEvent = (evt, cb, errorCb) => {
   let url = `${API_URL}/events/${evt.id}`;
 
   q.delete(url)
-    .then((data) => cb(data));
+    .then((resp) => cb(evt.id))
+    .catch(errorCb);
 }
 
 export default {
