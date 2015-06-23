@@ -16,6 +16,7 @@
     "moment": "^2.10.3",
     "qwest": "^1.7.0",
     "react": "^0.13.3",
-    "react-router": "^0.13.3"
+    "react-router": "^0.13.3",
+    "skycons": "^1.0.0"
   }
 }

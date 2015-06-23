@@ -7,10 +7,12 @@ import Actions from '../actions';
 import EventModel from '../entities/event';
 import Event from './workspace/event';
 import Toolbar from './workspace/toolbar';
+import Weather from './weather';
 
 const TIME_FORMAT = 'LT'
 
 let workspaceOpenCursor;
+let weatherCursor;
 
 let canPreview = (model) => {
   return model.name || model.startsAt || model.endsAt;
@@ -24,7 +26,8 @@ class Workspace extends React.Component {
     this.state = {
       text: EventModel.sampleDescription,
       model: newEvent,
-      open: false
+      open: false,
+      weather: {}
     }
   }
   render() {
@@ -55,20 +58,29 @@ class Workspace extends React.Component {
 
     return (
       <section className="workspace">
+        <Weather data={this.state.weather}/>
         {form}
       </section>
     )
   }
   componentWillMount() {
     workspaceOpenCursor = State.select('workspaceOpen');
+    weatherCursor = State.select('weather');
   }
   componentWillUnmount() {
     workspaceOpenCursor.release();
+    weatherCursor.release();
   }
   componentDidMount() {
-    this.setState({open: workspaceOpenCursor.get()});
+    this.setState({
+      open: workspaceOpenCursor.get(),
+      weather: weatherCursor.get()
+    });
     workspaceOpenCursor.on('update', (upd) => {
       this.setState({open: upd.data.data});
+    });
+    weatherCursor.on('update', (upd) => {
+      this.setState({weather: upd.data.data});
     });
   }
   handleChange(changeEvt) {

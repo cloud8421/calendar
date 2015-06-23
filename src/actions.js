@@ -39,7 +39,12 @@ const Actions = {
       actionType: 'delete-event',
       value: evt
     });
-  }
+  },
+  getWeather() {
+    appDispatcher.dispatch({
+      actionType: 'get-weather'
+    });
+  },
 }
 
 export default Actions;

@@ -26,6 +26,14 @@ let fetchEvents = (cb) => {
     .then(cb);
 }
 
+let fetchWeather = (cb) => {
+  let opts = { headers: HEADERS };
+  let url = `${API_URL}/weather`;
+
+  q.get(url, {}, opts)
+    .then(cb);
+}
+
 let createEvent = (evtData, cb, errorCb) => {
   let payload = {
     name: evtData.name,
@@ -52,5 +60,6 @@ let deleteEvent = (evt, cb, errorCb) => {
 export default {
   fetchEvents,
   createEvent,
-  deleteEvent
+  deleteEvent,
+  fetchWeather
 }

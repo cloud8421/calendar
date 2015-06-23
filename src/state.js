@@ -25,7 +25,8 @@ let State = new Baobab({
     startDate: null,
     currentDate: moment(),
     workspaceOpen: false,
-    events: []
+    events: [],
+    weather: {}
   },
   stateOpts);
 
@@ -87,6 +88,11 @@ AppDispatcher.register((payload) => {
     case 'delete-event':
       Transport.deleteEvent(payload.value, deleteEvent, setError);
       break;
+    case 'get-weather':
+      Transport.fetchWeather((data) => {
+        State.set('weather', data);
+        State.commit();
+      });
     default:
       return true
   }

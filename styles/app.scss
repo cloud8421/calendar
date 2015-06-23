@@ -313,3 +313,9 @@ input {
     margin-bottom: 1em;
   }
 }
+
+.weather-container {
+  @include display(flex);
+  @include justify-content(flex-end);
+  margin-bottom: 1em;
+}
