@@ -7,6 +7,7 @@ class Toolbar extends React.Component {
         <input className="ok"
                type="button"
                value="Save"
+               disabled={!this.props.canSave}
                onClick={this.props.onOk} />
         <input className="warn"
                type="button"

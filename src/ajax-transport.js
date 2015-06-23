@@ -1,7 +1,7 @@
 import q from 'qwest';
 import moment from 'moment';
 
-const API_URL = 'http://localhost:9393';
+const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com'
 
 const HEADERS = {
   'Accept': 'application/vnd.calendar-v1+json'

@@ -12,7 +12,7 @@ const TIME_FORMAT = 'LT'
 
 let workspaceOpenCursor;
 
-let canPreview = (model) {
+let canPreview = (model) => {
   return model.name || model.startsAt || model.endsAt;
 }
 
@@ -30,6 +30,7 @@ class Workspace extends React.Component {
   render() {
     let model = this.state.model;
     let open = this.state.open;
+    let canSave = EventModel.isValid(this.state.model);
     let preview, form;
 
     if (canPreview(model)) {
@@ -46,6 +47,7 @@ class Workspace extends React.Component {
                onChange={this.handleChange.bind(this)} />
         {preview}
         <Toolbar event={model}
+                 canSave={canSave}
                  onOk={this.createEvent.bind(this)}
                  onCancel={Actions.closeWorkspace} />
       </form>

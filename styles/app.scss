@@ -283,6 +283,10 @@ input {
   input {
     margin-left: 0.5em;
     cursor: pointer;
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
   }
 }
 
