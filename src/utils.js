@@ -25,10 +25,9 @@ let isSameDay = (mom1, mom2) => {
   return mom1.isSame(mom2, 'day');
 }
 
-let dateToDayPair = (d, now, selected) => {
+let dateToDayPair = (d, selected) => {
   return {
     day: d,
-    today: isSameDay(d, now),
     selected: isSameDay(d, selected)
   }
 }

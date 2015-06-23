@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from '../prop-types';
 import Actions from '../actions';
+import {isSameDay} from '../utils';
 
 let dayClass = (selected, today, count) => {
   let classes = ['day']
@@ -11,11 +12,15 @@ let dayClass = (selected, today, count) => {
   return classes.join(' ');
 }
 
+let isToday = (date) => {
+  return isSameDay(date, moment());
+}
+
 class Day extends React.Component {
   render() {
     let day = moment(this.props.day).format('D');
     let selected = this.props.selected;
-    let today = this.props.today;
+    let today = isToday(this.props.day);
     let events = this.props.events;
     let eventsCount;
 
@@ -26,7 +31,7 @@ class Day extends React.Component {
     )
   }
   openDetails() {
-    Actions.openDetails(this.props.day);
+    Actions.goToDate(this.props.day);
   }
 }
 

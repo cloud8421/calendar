@@ -13,24 +13,22 @@ import AddNewEvent from './add-new-event';
 class Month extends React.Component {
   render() {
     let weeks = weeksFromDate(this.props.startDate,
-                              this.props.currentDate,
-                              this.props.details);
-    let rows = weeks.map((week, idx) => {
+                              this.props.currentDate);
+    let rows = weeks.map((week, rowIdx) => {
       let days = week.map((dayObj, idx) => {
         let events = allInDay(this.props.events, dayObj.day);
         return <Day day={dayObj.day}
-                    today={dayObj.today}
                     selected={dayObj.selected}
                     key={idx}
                     events={events} />
       });
       return (
-        <ul className="days">{days}</ul>
+        <ul className="days" key={rowIdx}>{days}</ul>
       )
     });
 
     let detailsComponent;
-    let detailsDay = this.props.details;
+    let detailsDay = this.props.currentDate;
 
     if (detailsDay) {
       let eventsForDetails = allInDay(this.props.events, detailsDay);

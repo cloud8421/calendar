@@ -8,7 +8,6 @@ import Loading from './loading';
 let startDateCursor;
 let currentDateCursor;
 let openDetailsCursor;
-let currentDetailsCursor;
 
 let eventsFacet = State.facets.eventsGroupedByDay;
 
@@ -16,8 +15,7 @@ let getState = () => {
   return {
     startDate: startDateCursor.get(),
     currentDate: currentDateCursor.get(),
-    groupedEvents: eventsFacet.get(),
-    currentDetails: currentDetailsCursor.get()
+    groupedEvents: eventsFacet.get()
   }
 }
 
@@ -42,18 +40,16 @@ class MonthContainer extends React.Component {
     this.state = {
       startDate: null,
       currentDate: null,
-      currentDetails: null,
       groupedEvents: {}
     }
   }
   render() {
-    if (this.state.startDate && this.state.currentDate) {
+    if (this.state.startDate) {
       return (
         <div className="month-container">
           <Month startDate={this.state.startDate}
                  currentDate={this.state.currentDate}
-                 events={this.state.groupedEvents}
-                 details={this.state.currentDetails} />
+                 events={this.state.groupedEvents} />
         </div>
       );
     } else {
@@ -63,12 +59,10 @@ class MonthContainer extends React.Component {
   componentWillMount() {
     startDateCursor   = State.select('startDate');
     currentDateCursor = State.select('currentDate');
-    currentDetailsCursor = State.select('currentDetails');
   }
   componentWillUnmount() {
     startDateCursor.release();
     currentDateCursor.release();
-    currentDetailsCursor.release();
     eventsFacet.off('update', () => {
       this.setState(getState());
     })
@@ -87,9 +81,6 @@ class MonthContainer extends React.Component {
       this.setState(getState());
     });
     currentDateCursor.on('update', () => {
-      this.setState(getState());
-    });
-    currentDetailsCursor.on('update', () => {
       this.setState(getState());
     });
     Actions.getEvents();

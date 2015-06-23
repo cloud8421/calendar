@@ -17,9 +17,9 @@ const Actions = {
       actionType: 'back-one-month'
     });
   },
-  openDetails(mom) {
+  goToDate(mom) {
     appDispatcher.dispatch({
-      actionType: 'open-details',
+      actionType: 'go-to-date',
       value: mom
     })
   },
