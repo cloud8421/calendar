@@ -1,16 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from '../../prop-types';
-
-const TIME_FORMAT = 'LT'
-
-let formatTime = (d) => {
-  if (d) {
-    return moment(d).format(TIME_FORMAT);
-  } else {
-    return 'Not present';
-  }
-}
+import Datetime from './datetime';
 
 class Event extends React.Component {
   render() {
@@ -22,11 +13,11 @@ class Event extends React.Component {
         <dl>
           <dt>Starts</dt>
           <dd>
-            <time dateTime={evt.startsAt}>{formatTime(evt.startsAt)}</time>
+            <Datetime date={evt.startsAt} />
           </dd>
           <dt>Ends</dt>
           <dd>
-            <time dateTime={evt.endsAt}>{formatTime(evt.endsAt)}</time>
+            <Datetime date={evt.endsAt} />
           </dd>
         </dl>
       </section>
