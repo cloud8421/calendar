@@ -26,14 +26,14 @@ let validParams = (params) => {
 }
 
 let setMonth = (params) => {
-  let curDate;
+  let startDate;
 
   if (validParams(params)) {
-    curDate = moment(new Date(params.year, params.month - 1, 1));
+    startDate = moment(new Date(params.year, params.month - 1, 1));
   } else {
-    curDate = moment(new Date());
+    startDate = moment(new Date());
   }
-  Actions.setCurrentDay(curDate);
+  Actions.setStartDate(startDate);
 }
 
 class MonthContainer extends React.Component {

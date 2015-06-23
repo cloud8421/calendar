@@ -69,7 +69,7 @@ AppDispatcher.register((payload) => {
       State.set('currentDetails', null);
       State.commit();
       break;
-    case 'set-current-date':
+    case 'set-start-date':
       State.set('startDate', payload.value);
       State.set('currentDetails', null);
       State.commit();

@@ -1,9 +1,9 @@
 import appDispatcher from './dispatcher';
 
 const Actions = {
-  setCurrentDay(mom) {
+  setStartDate(mom) {
     appDispatcher.dispatch({
-      actionType: 'set-current-date',
+      actionType: 'set-start-date',
       value: mom
     });
   },
