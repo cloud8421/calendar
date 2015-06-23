@@ -80,12 +80,14 @@ AppDispatcher.register((payload) => {
       });
       break;
     case 'delete-event':
-      eventsCursor.apply((current) => {
-        return current.filter((evt) => {
-          return evt.id !== payload.value.id
+      Transport.deleteEvent(payload.value, (resp) => {
+        eventsCursor.apply((current) => {
+          return current.filter((evt) => {
+            return evt.id !== payload.value.id
+          });
         });
-      });
-      State.commit();
+        State.commit();
+      })
       break;
     default:
       return true

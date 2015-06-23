@@ -32,13 +32,23 @@ let createEvent = (evtData, cb) => {
     starts_at: evtData.startsAt.toISOString(),
     ends_at: evtData.endsAt.toISOString()
   };
+
+  let opts = { headers: HEADERS };
   let url = `${API_URL}/events`;
-  q.post(url, payload)
+  q.post(url, payload, opts)
     .then((data) => normalizeEvent(data))
     .then((norm) => cb(norm));
 }
 
+let deleteEvent = (evt, cb) => {
+  let url = `${API_URL}/events/${evt.id}`;
+
+  q.delete(url)
+    .then((data) => cb(data));
+}
+
 export default {
   fetchEvents,
-  createEvent
+  createEvent,
+  deleteEvent
 }
