@@ -79,6 +79,14 @@ AppDispatcher.register((payload) => {
         State.commit();
       });
       break;
+    case 'delete-event':
+      eventsCursor.apply((current) => {
+        return current.filter((evt) => {
+          return evt.id !== payload.value.id
+        });
+      });
+      State.commit();
+      break;
     default:
       return true
   }

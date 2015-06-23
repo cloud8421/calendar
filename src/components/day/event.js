@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from '../../prop-types';
+import Actions from '../../actions';
 
 const TIME_FORMAT = 'LT'
 
@@ -25,8 +26,12 @@ class Event extends React.Component {
           <time dateTime={evt.endsAt}>{formatTime(evt.endsAt)}</time>
         </span>
         <span className="description">{evt.name}</span>
+        <a className="ui action" onClick={this.deleteEvent.bind(this)}>✕</a>
       </li>
     )
+  }
+  deleteEvent() {
+    Actions.deleteEvent(this.props.event);
   }
 }
 

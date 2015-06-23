@@ -237,6 +237,11 @@ input {
   .description {
     margin-left: 1em;
   }
+
+  .action {
+    display: inline-block;
+    float: right;
+  }
 }
 
 .when * {

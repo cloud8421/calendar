@@ -43,6 +43,12 @@ const Actions = {
       actionType: 'create-event',
       value: data
     });
+  },
+  deleteEvent(evt) {
+    appDispatcher.dispatch({
+      actionType: 'delete-event',
+      value: evt
+    });
   }
 }
 

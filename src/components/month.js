@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-import Actions from '../actions';
 import Week from './week';
 import {weeksFromDate} from '../utils';
 import {allInDay} from '../entities/event';
