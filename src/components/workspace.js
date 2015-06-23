@@ -12,6 +12,10 @@ const TIME_FORMAT = 'LT'
 
 let workspaceOpenCursor;
 
+let canPreview = (model) {
+  return model.name || model.startsAt || model.endsAt;
+}
+
 class Workspace extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +32,7 @@ class Workspace extends React.Component {
     let open = this.state.open;
     let preview, form;
 
-    if (model.name) {
+    if (canPreview(model)) {
       preview = <Event event={model} />
     }
 
