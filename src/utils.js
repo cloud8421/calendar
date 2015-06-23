@@ -25,18 +25,19 @@ let isSameDay = (mom1, mom2) => {
   return mom1.isSame(mom2, 'day');
 }
 
-let dateToDayPair = (d, now) => {
+let dateToDayPair = (d, now, selected) => {
   return {
     day: d,
-    selected: isSameDay(d, now)
+    today: isSameDay(d, now),
+    selected: isSameDay(d, selected)
   }
 }
 
-let weeksFromDate = (mom, now) => {
+let weeksFromDate = (mom, now, selected) => {
   let d = mom._d;
   return Cal.monthDates(d.getFullYear(),
                        d.getMonth(),
-                       (curDate) => dateToDayPair(moment(curDate), now),
+                       (curDate) => dateToDayPair(moment(curDate), now, selected),
                        (curWeek) => curWeek)
 }
 

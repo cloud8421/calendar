@@ -1,20 +1,32 @@
 import React from 'react';
 import moment from 'moment';
 
-import Week from './week';
 import {weeksFromDate} from '../utils';
 import {allInDay} from '../entities/event';
 
 import MonthSwitcher from './month/switcher';
 import MonthHeaders from './month/headers';
+import Day from './day';
 import Details from './day/details';
 import AddNewEvent from './add-new-event';
 
 class Month extends React.Component {
   render() {
-    let weeks = weeksFromDate(this.props.startDate, this.props.currentDate);
-    let weekComponents = weeks.map((week, idx) => {
-      return <Week week={week} key={idx} events={this.props.events} />
+    let weeks = weeksFromDate(this.props.startDate,
+                              this.props.currentDate,
+                              this.props.details);
+    let rows = weeks.map((week, idx) => {
+      let days = week.map((dayObj, idx) => {
+        let events = allInDay(this.props.events, dayObj.day);
+        return <Day day={dayObj.day}
+                    today={dayObj.today}
+                    selected={dayObj.selected}
+                    key={idx}
+                    events={events} />
+      });
+      return (
+        <ul className="days">{days}</ul>
+      )
     });
 
     let detailsComponent;
@@ -30,7 +42,7 @@ class Month extends React.Component {
         <MonthSwitcher startDate={this.props.startDate} />
         <section className="month">
           <MonthHeaders />
-          {weekComponents}
+          {rows}
         </section>
         {detailsComponent}
         <AddNewEvent />

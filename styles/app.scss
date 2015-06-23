@@ -216,6 +216,12 @@ input {
 
 .today {
   .date {
+    background-color: lighten($ui-accent-color-transparent, 10%);
+  }
+}
+
+.selected {
+  .date {
     background-color: $ui-accent-color-transparent;
   }
 }
