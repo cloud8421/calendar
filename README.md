@@ -22,6 +22,6 @@ Then open <http://localhost:8000>
 
 ### Missing features
 
-- [] Writes to API
-- [] Error handling
-- [] Undo/Redo
+- [x] Writes to API
+- [ ] Error handling
+- [ ] Undo/Redo
