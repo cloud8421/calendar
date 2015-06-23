@@ -75,6 +75,7 @@ AppDispatcher.register((payload) => {
           current.push(created);
           return current;
         });
+        State.set('workspaceOpen', false);
         State.commit();
       });
       break;
