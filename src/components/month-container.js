@@ -37,11 +37,10 @@ let setMonth = (params) => {
 class MonthContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      startDate: null,
-      currentDate: null,
-      groupedEvents: {}
-    }
+    startDateCursor   = State.select('startDate');
+    currentDateCursor = State.select('currentDate');
+
+    this.state = getState();
   }
   render() {
     if (this.state.startDate) {

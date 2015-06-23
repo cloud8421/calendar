@@ -7,16 +7,6 @@ const Actions = {
       value: mom
     });
   },
-  forwardOneMonth() {
-    appDispatcher.dispatch({
-      actionType: 'forward-one-month'
-    });
-  },
-  backOneMonth() {
-    appDispatcher.dispatch({
-      actionType: 'back-one-month'
-    });
-  },
   goToDate(mom) {
     appDispatcher.dispatch({
       actionType: 'go-to-date',

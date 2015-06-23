@@ -28,11 +28,11 @@ class Month extends React.Component {
     });
 
     let detailsComponent;
-    let detailsDay = this.props.currentDate;
+    let currentDate = this.props.currentDate;
 
-    if (detailsDay) {
-      let eventsForDetails = allInDay(this.props.events, detailsDay);
-      detailsComponent = <Details day={detailsDay} events={eventsForDetails} />
+    if (currentDate) {
+      let eventsForDetails = allInDay(this.props.events, currentDate);
+      detailsComponent = <Details day={currentDate} events={eventsForDetails} />
     }
 
     return (

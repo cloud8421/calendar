@@ -23,7 +23,7 @@ let stateOpts = {
 
 let State = new Baobab({
     startDate: null,
-    currentDate: null,
+    currentDate: moment(),
     workspaceOpen: false,
     events: []
   },
@@ -58,16 +58,6 @@ let setError = (error, resp) => {
 
 AppDispatcher.register((payload) => {
   switch(payload.actionType) {
-    case 'forward-one-month':
-      startDateCursor.apply(incOneMonth);
-      State.set('currentDate', null);
-      State.commit();
-      break;
-    case 'back-one-month':
-      startDateCursor.apply(decOneMonth);
-      State.set('currentDate', null);
-      State.commit();
-      break;
     case 'set-start-date':
       State.set('startDate', payload.value);
       State.set('currentDate', null);
