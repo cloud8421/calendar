@@ -319,3 +319,30 @@ input {
   @include justify-content(flex-end);
   margin-bottom: 1em;
 }
+
+.debugger {
+  background-color: #111;
+
+  header {
+    @include display(flex);
+    @include justify-content(space-between);
+  }
+
+  .revisions-count {
+    color: red;
+  }
+
+  .revisions {
+    overflow-x: scroll;
+
+    li {
+      padding: 0.5em;
+      width: 12em;
+      height: 4em;
+      border-bottom: 1px solid red;
+      &:hover {
+        background-color: #444;
+      }
+    }
+  }
+}
