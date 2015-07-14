@@ -1,21 +1,25 @@
 import q from 'qwest';
 import moment from 'moment';
 
-const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com'
+const API_URL = 'https://new-bamboo-calendar-api.herokuapp.com';
 
 const HEADERS = {
   'Accept': 'application/vnd.calendar-v1+json'
-}
+};
+
+const LAT = 51.5181212;
+const LNG = -0.0971355;
+const WEATHER_TIME = new Date();
 
 let normalizeEvent = (evt) => {
   evt.startsAt = moment(evt.starts_at)._d;
   evt.endsAt = moment(evt.ends_at)._d;
-  return evt
-}
+  return evt;
+};
 
 let normalizeEvents = (events) => {
   return events.map((evt) => normalizeEvent(evt));
-}
+};
 
 let fetchEvents = (cb) => {
   let opts = { headers: HEADERS };
@@ -24,15 +28,20 @@ let fetchEvents = (cb) => {
   q.get(url, {}, opts)
     .then(normalizeEvents)
     .then(cb);
-}
+};
 
 let fetchWeather = (cb) => {
   let opts = { headers: HEADERS };
   let url = `${API_URL}/weather`;
+  let params = {
+    lat: LAT,
+    lng: LNG,
+    time: WEATHER_TIME.toISOString()
+  };
 
-  q.get(url, {}, opts)
+  q.get(url, params, opts)
     .then(cb);
-}
+};
 
 let createEvent = (evtData, cb, errorCb) => {
   let payload = {
@@ -47,7 +56,7 @@ let createEvent = (evtData, cb, errorCb) => {
     .then(normalizeEvent)
     .then(cb)
     .catch(errorCb);
-}
+};
 
 let deleteEvent = (evt, cb, errorCb) => {
   let url = `${API_URL}/events/${evt.id}`;
@@ -55,11 +64,11 @@ let deleteEvent = (evt, cb, errorCb) => {
   q.delete(url)
     .then((resp) => cb(evt.id))
     .catch(errorCb);
-}
+};
 
 export default {
   fetchEvents,
   createEvent,
   deleteEvent,
   fetchWeather
-}
+};
